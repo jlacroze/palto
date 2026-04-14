@@ -47,7 +47,6 @@
   transition: all 0.3s ease;
 }
 
-/* animation croix */
 .open span:nth-child(1) {
   transform: rotate(45deg) translate(4px, 4px);
 }
@@ -60,7 +59,7 @@
   transform: rotate(-45deg) translate(4px, -4px);
 }
 
-/* ===== LINKS DESKTOP ===== */
+/* ===== DESKTOP LINKS ===== */
 
 .links {
   display: none;
@@ -91,6 +90,11 @@
   width: 100%;
 }
 
+/* active */
+.active::after {
+  width: 100% !important;
+}
+
 /* ===== MOBILE MENU ===== */
 
 .mobileMenu {
@@ -111,6 +115,7 @@
   transition: transform 0.5s ease, opacity 0.4s ease;
 
   overflow: hidden;
+  z-index: 150;
 }
 
 .mobileMenu.show {
@@ -157,7 +162,12 @@
   width: 100%;
 }
 
-/* animation liens */
+/* active */
+.menuContent a.active::after {
+  width: 100%;
+}
+
+/* animation links */
 @keyframes fadeInUp {
   to {
     opacity: 1;
@@ -172,7 +182,7 @@
   border-radius: 50%;
   border: 1px solid rgba(247, 244, 238, 0.2);
   animation: rotateCircle linear infinite;
-  z-index: 0;
+  z-index: 1;
 }
 
 .circle::before {
@@ -213,12 +223,8 @@
 
 /* rotation */
 @keyframes rotateCircle {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
 }
 
 /* ===== DESKTOP ===== */
@@ -241,7 +247,4 @@
     display: flex;
     gap: 30px;
   }
-}
-.active::after {
-  width: 100% !important;
 }

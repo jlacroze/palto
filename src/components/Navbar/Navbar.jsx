@@ -29,27 +29,27 @@ export default function Navbar() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  // ACTIVE SECTION
-useEffect(() => {
-  const sections = document.querySelectorAll("section");
+  // active section (scroll spy FIXED)
+  useEffect(() => {
+    const sections = document.querySelectorAll("section");
 
-  const observer = new IntersectionObserver(
-    (entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          setActive(entry.target.id);
-        }
-      });
-    },
-    {
-      threshold: 0.5, // 🔥 important
-    }
-  );
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            setActive(entry.target.id);
+          }
+        });
+      },
+      {
+        rootMargin: "-40% 0px -40% 0px",
+      }
+    );
 
-  sections.forEach((section) => observer.observe(section));
+    sections.forEach((section) => observer.observe(section));
 
-  return () => observer.disconnect();
-}, []);
+    return () => observer.disconnect();
+  }, []);
 
   const closeMenu = () => setIsOpen(false);
 
@@ -84,15 +84,22 @@ useEffect(() => {
         </button>
       </div>
 
-      {/* Mobile */}
+      {/* Mobile menu */}
       <div className={`${styles.mobileMenu} ${isOpen ? styles.show : ""}`}>
+        
+        {/* cercles */}
+        <div className={`${styles.circle} ${styles.circle1}`}></div>
+        <div className={`${styles.circle} ${styles.circle2}`}></div>
+        <div className={`${styles.circle} ${styles.circle3}`}></div>
+
         <div className={styles.menuContent}>
-          {navLinks.map((link) => (
+          {navLinks.map((link, index) => (
             <a
               key={link.id}
               href={`#${link.id}`}
               onClick={closeMenu}
               className={active === link.id ? styles.active : ""}
+              style={{ animationDelay: `${index * 0.1}s` }}
             >
               {link.label}
             </a>
