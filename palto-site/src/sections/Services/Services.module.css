@@ -1,0 +1,48 @@
+.services {
+  background-color: var(--color-cream);
+  padding: 100px 40px;
+  display: flex;
+  justify-content: center;
+}
+
+.inner {
+  max-width: 1200px;
+  width: 100%;
+  text-align: center;
+}
+
+.services h2 {
+  font-size: 36px;
+  margin: 20px 0 60px;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 40px;
+}
+
+.card {
+  background-color: white;
+  padding: 40px;
+  text-align: left;
+  border: 1px solid #eee;
+  transition: all 0.3s ease;
+}
+
+.card h3 {
+  font-size: 20px;
+  margin-bottom: 15px;
+  color: var(--color-ink);
+}
+
+.card p {
+  color: var(--color-silver);
+  line-height: 1.6;
+}
+
+/* Effet premium subtil */
+.card:hover {
+  transform: translateY(-5px);
+  border-color: var(--color-gold);
+}
