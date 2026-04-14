@@ -10,7 +10,7 @@
   transition: box-shadow 0.3s ease;
 }
 
-/* shadow au scroll */
+/* shadow scroll */
 .scrolled {
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
 }
@@ -38,6 +38,7 @@
   cursor: pointer;
   background: none;
   border: none;
+  z-index: 30;
 }
 
 .burger span {
@@ -60,7 +61,7 @@
   transform: rotate(-45deg) translate(4px, -4px);
 }
 
-/* ===== LINKS ===== */
+/* ===== LINKS DESKTOP ===== */
 
 .links {
   display: none;
@@ -75,7 +76,7 @@
   position: relative;
 }
 
-/* underline premium */
+/* underline */
 .links a::after {
   content: "";
   position: absolute;
@@ -109,6 +110,8 @@
 
   transform: translateY(-100%);
   transition: transform 0.4s ease;
+
+  overflow: hidden;
 }
 
 .mobileMenu.show {
@@ -121,6 +124,7 @@
   font-size: 26px;
   letter-spacing: 2px;
   position: relative;
+  z-index: 2;
 }
 
 /* underline mobile */
@@ -137,6 +141,63 @@
 
 .mobileMenu a:hover::after {
   width: 100%;
+}
+
+/* ===== CERCLES ===== */
+
+.circle {
+  position: absolute;
+  border-radius: 50%;
+  border: 1px solid rgba(247, 244, 238, 0.2);
+  animation: rotateCircle linear infinite;
+  z-index: 0;
+}
+
+/* arc */
+.circle::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  border-top: 2px solid var(--color-cream);
+}
+
+/* cercle 1 */
+.circle1 {
+  width: 300px;
+  height: 300px;
+  top: 10%;
+  left: -100px;
+  animation-duration: 20s;
+}
+
+/* cercle 2 */
+.circle2 {
+  width: 200px;
+  height: 200px;
+  bottom: 10%;
+  right: -80px;
+  animation-duration: 15s;
+}
+
+/* cercle 3 (centre léger) */
+.circle3 {
+  width: 150px;
+  height: 150px;
+  top: 45%;
+  left: 30%;
+  opacity: 0.08;
+  animation-duration: 12s;
+}
+
+/* rotation */
+@keyframes rotateCircle {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
 }
 
 /* ===== DESKTOP ===== */

@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import styles from "./Navbar.module.css";
-import logoWhite from "../../assets/logo_white.png";
+import logo from "../../assets/logo.png";
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
@@ -34,7 +34,7 @@ export default function Navbar() {
     <nav className={`${styles.navbar} ${scrolled ? styles.scrolled : ""}`}>
       <div className={styles.inner}>
         <a href="#home" onClick={closeMenu}>
-          <img src={logoWhite} alt="PALTO" className={styles.logo} />
+          <img src={logo} alt="PALTO" className={styles.logo} />
         </a>
 
         {/* Desktop */}
@@ -59,6 +59,12 @@ export default function Navbar() {
 
       {/* Mobile menu */}
       <div className={`${styles.mobileMenu} ${isOpen ? styles.show : ""}`}>
+        
+        {/* cercles */}
+        <div className={`${styles.circle} ${styles.circle1}`}></div>
+        <div className={`${styles.circle} ${styles.circle2}`}></div>
+        <div className={`${styles.circle} ${styles.circle3}`}></div>
+
         {navLinks.map((link) => (
           <a key={link.id} href={`#${link.id}`} onClick={closeMenu}>
             {link.label}
