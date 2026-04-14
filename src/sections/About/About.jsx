@@ -1,8 +1,17 @@
 import styles from "./About.module.css";
+import useReveal from "../../hooks/useReveal";
 
 export default function About() {
+  const [ref, visible] = useReveal();
+
   return (
-    <section id="about" className={styles.about}>
+    <section
+      id="about"
+      ref={ref}
+      className={`${styles.about} ${
+        visible ? "reveal-visible" : "reveal"
+      }`}
+    >
       <div className={styles.inner}>
         <p className="label">Qui sommes-nous</p>
 
@@ -10,13 +19,11 @@ export default function About() {
 
         <p className={styles.text}>
           PALTO accompagne les entreprises dans leurs décisions les plus
-          structurantes. Nous intervenons à la croisée de la stratégie,
-          de la transformation et de la performance opérationnelle.
+          structurantes.
         </p>
 
         <p className={styles.text}>
-          Notre approche repose sur une compréhension fine des enjeux,
-          une exigence élevée et une exécution rigoureuse.
+          Une exigence forte, une vision claire, des résultats mesurables.
         </p>
       </div>
     </section>

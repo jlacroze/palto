@@ -1,26 +1,31 @@
 import styles from "./Hero.module.css";
+import useReveal from "../../hooks/useReveal";
 
 export default function Hero() {
-  return (
-    <section id="home" className={styles.hero}>
-      <div className={styles.content}>
-        <p className={`${styles.fadeUp} ${styles.delay1} label`}>
-          Cabinet de conseil
-        </p>
+  const [ref, visible] = useReveal();
 
-        <h1 className={`${styles.fadeUp} ${styles.delay2}`}>
+  return (
+    <section
+      id="home"
+      ref={ref}
+      className={`${styles.hero} ${
+        visible ? "reveal-visible" : "reveal"
+      }`}
+    >
+      <div className={styles.content}>
+        <p className="label">Cabinet de conseil</p>
+
+        <h1>
           Excellence<br />
           <span className={styles.highlight}>& stratégie</span>
         </h1>
 
-        <p className={`${styles.fadeUp} ${styles.delay3} ${styles.subtitle}`}>
+        <p className={styles.subtitle}>
           Nous accompagnons les entreprises dans leurs décisions stratégiques
           avec exigence, précision et vision long terme.
         </p>
 
-        <button className={`${styles.fadeUp} ${styles.delay4} button-primary`}>
-          Prendre contact
-        </button>
+        <button className="button-primary">Prendre contact</button>
       </div>
     </section>
   );

@@ -1,6 +1,6 @@
 .about {
   padding: 60px 20px;
-  background-color: white;
+  background-color: var(--color-cream); /* 🔥 changé */
   display: flex;
   justify-content: center;
 }

@@ -1,5 +1,5 @@
 .services {
-  background-color: var(--color-cream);
+  background-color: white; /* 🔥 changé */
   padding: 60px 20px;
   display: flex;
   justify-content: center;
@@ -22,7 +22,7 @@
 }
 
 .card {
-  background-color: white;
+  background-color: var(--color-cream); /* léger contraste */
   padding: 25px;
   text-align: left;
   border: 1px solid #eee;
@@ -38,7 +38,7 @@
   color: var(--color-silver);
 }
 
-/* ===== DESKTOP ===== */
+/* desktop */
 @media (min-width: 768px) {
   .services {
     padding: 100px 40px;
