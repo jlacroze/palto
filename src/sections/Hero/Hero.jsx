@@ -3,22 +3,24 @@ import styles from "./Hero.module.css";
 export default function Hero() {
   return (
     <section className={styles.hero}>
-      <div className={styles.overlay} />
-
       <div className={styles.content}>
-        <p className="label">Cabinet de conseil</p>
-
-        <h1>
-          Excellence<br />
-          & stratégie
-        </h1>
-
-        <p className={styles.subtitle}>
-          Nous accompagnons les entreprises dans leurs décisions les plus
-          stratégiques avec exigence et précision.
+        <p className={`${styles.fadeUp} ${styles.delay1} label`}>
+          Cabinet de conseil
         </p>
 
-        <button className="button-primary">Prendre contact</button>
+        <h1 className={`${styles.fadeUp} ${styles.delay2}`}>
+          Excellence<br />
+          <span className={styles.highlight}>& stratégie</span>
+        </h1>
+
+        <p className={`${styles.fadeUp} ${styles.delay3} ${styles.subtitle}`}>
+          Nous accompagnons les entreprises dans leurs décisions stratégiques
+          avec exigence, précision et vision long terme.
+        </p>
+
+        <button className={`${styles.fadeUp} ${styles.delay4} button-primary`}>
+          Prendre contact
+        </button>
       </div>
     </section>
   );
