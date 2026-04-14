@@ -5,13 +5,21 @@ import logo from "../../assets/logo.png";
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const [active, setActive] = useState("home");
 
-  // bloque scroll menu mobile
+  const navLinks = [
+    { label: "Accueil", id: "home" },
+    { label: "Services", id: "services" },
+    { label: "À propos", id: "about" },
+    { label: "Équipe", id: "team" },
+  ];
+
+  // lock scroll menu
   useEffect(() => {
     document.body.style.overflow = isOpen ? "hidden" : "";
   }, [isOpen]);
 
-  // shadow au scroll
+  // shadow scroll
   useEffect(() => {
     const handleScroll = () => {
       setScrolled(window.scrollY > 10);
@@ -21,14 +29,29 @@ export default function Navbar() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  const closeMenu = () => setIsOpen(false);
+  // ACTIVE SECTION
+useEffect(() => {
+  const sections = document.querySelectorAll("section");
 
-  const navLinks = [
-    { label: "Accueil", id: "home" },
-    { label: "Services", id: "services" },
-    { label: "À propos", id: "about" },
-    { label: "Équipe", id: "team" },
-  ];
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          setActive(entry.target.id);
+        }
+      });
+    },
+    {
+      threshold: 0.5, // 🔥 important
+    }
+  );
+
+  sections.forEach((section) => observer.observe(section));
+
+  return () => observer.disconnect();
+}, []);
+
+  const closeMenu = () => setIsOpen(false);
 
   return (
     <nav className={`${styles.navbar} ${scrolled ? styles.scrolled : ""}`}>
@@ -40,7 +63,11 @@ export default function Navbar() {
         {/* Desktop */}
         <div className={styles.links}>
           {navLinks.map((link) => (
-            <a key={link.id} href={`#${link.id}`}>
+            <a
+              key={link.id}
+              href={`#${link.id}`}
+              className={active === link.id ? styles.active : ""}
+            >
               {link.label}
             </a>
           ))}
@@ -57,19 +84,20 @@ export default function Navbar() {
         </button>
       </div>
 
-      {/* Mobile menu */}
+      {/* Mobile */}
       <div className={`${styles.mobileMenu} ${isOpen ? styles.show : ""}`}>
-        
-        {/* cercles */}
-        <div className={`${styles.circle} ${styles.circle1}`}></div>
-        <div className={`${styles.circle} ${styles.circle2}`}></div>
-        <div className={`${styles.circle} ${styles.circle3}`}></div>
-
-        {navLinks.map((link) => (
-          <a key={link.id} href={`#${link.id}`} onClick={closeMenu}>
-            {link.label}
-          </a>
-        ))}
+        <div className={styles.menuContent}>
+          {navLinks.map((link) => (
+            <a
+              key={link.id}
+              href={`#${link.id}`}
+              onClick={closeMenu}
+              className={active === link.id ? styles.active : ""}
+            >
+              {link.label}
+            </a>
+          ))}
+        </div>
       </div>
     </nav>
   );

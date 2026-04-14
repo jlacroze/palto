@@ -10,7 +10,6 @@
   transition: box-shadow 0.3s ease;
 }
 
-/* shadow scroll */
 .scrolled {
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
 }
@@ -38,7 +37,7 @@
   cursor: pointer;
   background: none;
   border: none;
-  z-index: 30;
+  z-index: 200;
 }
 
 .burger span {
@@ -48,7 +47,7 @@
   transition: all 0.3s ease;
 }
 
-/* animation */
+/* animation croix */
 .open span:nth-child(1) {
   transform: rotate(45deg) translate(4px, 4px);
 }
@@ -103,32 +102,47 @@
   background-color: var(--color-cobalt);
 
   display: flex;
-  flex-direction: column;
   justify-content: center;
   align-items: center;
-  gap: 40px;
 
-  transform: translateY(-100%);
-  transition: transform 0.4s ease;
+  transform: translateY(-100%) scale(0.95);
+  opacity: 0;
+
+  transition: transform 0.5s ease, opacity 0.4s ease;
 
   overflow: hidden;
 }
 
 .mobileMenu.show {
-  transform: translateY(0);
+  transform: translateY(0) scale(1);
+  opacity: 1;
 }
 
-.mobileMenu a {
+/* ===== MENU CONTENT ===== */
+
+.menuContent {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+  align-items: center;
+  z-index: 2;
+}
+
+.menuContent a {
   color: white;
   font-family: "Georgia", serif;
   font-size: 26px;
   letter-spacing: 2px;
+  text-decoration: none;
   position: relative;
-  z-index: 2;
+
+  opacity: 0;
+  transform: translateY(20px);
+  animation: fadeInUp 0.5s ease forwards;
 }
 
-/* underline mobile */
-.mobileMenu a::after {
+/* underline */
+.menuContent a::after {
   content: "";
   position: absolute;
   left: 0;
@@ -139,8 +153,16 @@
   transition: width 0.3s ease;
 }
 
-.mobileMenu a:hover::after {
+.menuContent a:hover::after {
   width: 100%;
+}
+
+/* animation liens */
+@keyframes fadeInUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 /* ===== CERCLES ===== */
@@ -153,7 +175,6 @@
   z-index: 0;
 }
 
-/* arc */
 .circle::before {
   content: "";
   position: absolute;
@@ -180,7 +201,7 @@
   animation-duration: 15s;
 }
 
-/* cercle 3 (centre léger) */
+/* cercle 3 */
 .circle3 {
   width: 150px;
   height: 150px;
@@ -220,4 +241,7 @@
     display: flex;
     gap: 30px;
   }
+}
+.active::after {
+  width: 100% !important;
 }
