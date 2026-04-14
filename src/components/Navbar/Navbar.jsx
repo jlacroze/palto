@@ -4,32 +4,52 @@ import logo from "../../assets/logo.png";
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
 
-  // bloque le scroll quand menu ouvert
+  // bloque scroll menu mobile
   useEffect(() => {
     document.body.style.overflow = isOpen ? "hidden" : "";
   }, [isOpen]);
 
-  const toggleMenu = () => setIsOpen(!isOpen);
+  // shadow au scroll
+  useEffect(() => {
+    const handleScroll = () => {
+      setScrolled(window.scrollY > 10);
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
   const closeMenu = () => setIsOpen(false);
 
+  const navLinks = [
+    { label: "Accueil", id: "home" },
+    { label: "Services", id: "services" },
+    { label: "À propos", id: "about" },
+    { label: "Équipe", id: "team" },
+  ];
+
   return (
-    <nav className={styles.navbar}>
+    <nav className={`${styles.navbar} ${scrolled ? styles.scrolled : ""}`}>
       <div className={styles.inner}>
-        <img src={logo} alt="PALTO" className={styles.logo} />
+        <a href="#home" onClick={closeMenu}>
+          <img src={logo} alt="PALTO" className={styles.logo} />
+        </a>
 
         {/* Desktop */}
         <div className={styles.links}>
-          <a href="#">Accueil</a>
-          <a href="#">Services</a>
-          <a href="#">Contact</a>
+          {navLinks.map((link) => (
+            <a key={link.id} href={`#${link.id}`}>
+              {link.label}
+            </a>
+          ))}
         </div>
 
         {/* Burger */}
         <button
           className={`${styles.burger} ${isOpen ? styles.open : ""}`}
-          onClick={toggleMenu}
-          aria-label="Menu"
+          onClick={() => setIsOpen(!isOpen)}
         >
           <span />
           <span />
@@ -37,17 +57,13 @@ export default function Navbar() {
         </button>
       </div>
 
-      {/* Overlay */}
-      <div
-        className={`${styles.overlay} ${isOpen ? styles.show : ""}`}
-        onClick={closeMenu}
-      />
-
       {/* Mobile menu */}
       <div className={`${styles.mobileMenu} ${isOpen ? styles.show : ""}`}>
-        <a onClick={closeMenu}>Accueil</a>
-        <a onClick={closeMenu}>Services</a>
-        <a onClick={closeMenu}>Contact</a>
+        {navLinks.map((link) => (
+          <a key={link.id} href={`#${link.id}`} onClick={closeMenu}>
+            {link.label}
+          </a>
+        ))}
       </div>
     </nav>
   );

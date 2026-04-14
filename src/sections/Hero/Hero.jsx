@@ -2,7 +2,7 @@ import styles from "./Hero.module.css";
 
 export default function Hero() {
   return (
-    <section className={styles.hero}>
+    <section id="home" className={styles.hero}>
       <div className={styles.content}>
         <p className={`${styles.fadeUp} ${styles.delay1} label`}>
           Cabinet de conseil

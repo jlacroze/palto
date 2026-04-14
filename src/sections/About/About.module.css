@@ -1,0 +1,33 @@
+.about {
+  padding: 60px 20px;
+  background-color: white;
+  display: flex;
+  justify-content: center;
+}
+
+.inner {
+  max-width: 800px;
+  text-align: center;
+}
+
+.about h2 {
+  font-size: 28px;
+  margin: 20px 0;
+}
+
+.text {
+  color: var(--color-silver);
+  line-height: 1.7;
+  margin-bottom: 20px;
+}
+
+/* desktop */
+@media (min-width: 768px) {
+  .about {
+    padding: 100px 40px;
+  }
+
+  .about h2 {
+    font-size: 36px;
+  }
+}

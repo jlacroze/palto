@@ -1,0 +1,64 @@
+.team {
+  background-color: var(--color-cream);
+  padding: 60px 20px;
+  display: flex;
+  justify-content: center;
+}
+
+.inner {
+  width: 100%;
+  text-align: center;
+}
+
+.team h2 {
+  font-size: 28px;
+  margin: 20px 0 40px;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 30px;
+}
+
+.card {
+  text-align: center;
+}
+
+.avatar {
+  width: 80px;
+  height: 80px;
+  margin: 0 auto 15px;
+  border-radius: 50%;
+  background-color: var(--color-slate);
+}
+
+.card h3 {
+  font-size: 18px;
+  margin-bottom: 5px;
+}
+
+.card p {
+  font-size: 14px;
+  color: var(--color-silver);
+}
+
+/* desktop */
+@media (min-width: 768px) {
+  .team {
+    padding: 100px 40px;
+  }
+
+  .inner {
+    max-width: 1200px;
+  }
+
+  .team h2 {
+    font-size: 36px;
+  }
+
+  .grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 40px;
+  }
+}

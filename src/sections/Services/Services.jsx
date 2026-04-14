@@ -2,7 +2,7 @@ import styles from "./Services.module.css";
 
 export default function Services() {
   return (
-    <section className={styles.services}>
+    <section id="services" className={styles.services}>
       <div className={styles.inner}>
         <p className="label">Nos expertises</p>
 
