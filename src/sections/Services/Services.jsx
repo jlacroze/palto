@@ -5,17 +5,18 @@ export default function Services() {
   const [ref, visible] = useReveal();
 
   return (
-    <section
-      id="services"
-      ref={ref}
-      className={`${styles.services} ${
-        visible ? "reveal-visible" : "reveal"
-      }`}
-    >
-      <div className={styles.inner}>
+    <section id="services" className={styles.services}>
+      <div
+        ref={ref}
+        className={`${styles.inner} ${
+          visible ? "reveal-visible" : "reveal"
+        }`}
+      >
         <p className="label">Nos expertises</p>
 
-        <h2>Des solutions adaptées à vos enjeux</h2>
+        <h2 className="section-title">
+          Des solutions adaptées à vos enjeux
+        </h2>
 
         <div className={styles.grid}>
           <div className={styles.card}>

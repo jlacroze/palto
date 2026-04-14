@@ -5,17 +5,16 @@ export default function Team() {
   const [ref, visible] = useReveal();
 
   return (
-    <section
-      id="team"
-      ref={ref}
-      className={`${styles.team} ${
-        visible ? "reveal-visible" : "reveal"
-      }`}
-    >
-      <div className={styles.inner}>
+    <section id="team" className={styles.team}>
+      <div
+        ref={ref}
+        className={`${styles.inner} ${
+          visible ? "reveal-visible" : "reveal"
+        }`}
+      >
         <p className="label">Équipe</p>
 
-        <h2>Des experts engagés</h2>
+        <h2 className="section-title">Des experts engagés</h2>
 
         <div className={styles.grid}>
           <div className={styles.card}>

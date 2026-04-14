@@ -1,7 +1,11 @@
 .hero {
+  position: relative;
+  overflow: hidden;
+
   min-height: 100vh;
   background-color: var(--color-cream);
   color: var(--color-ink);
+
   display: flex;
   align-items: center;
   justify-content: center;
@@ -10,6 +14,8 @@
 }
 
 .content {
+  position: relative;
+  z-index: 2;
   max-width: 700px;
 }
 
@@ -17,25 +23,9 @@
 
 .hero h1 {
   font-size: 32px;
-  line-height: 1.2;
   margin: 20px 0;
 }
 
-.highlight {
-  position: relative;
-}
-
-.highlight::after {
-  content: "";
-  position: absolute;
-  left: 0;
-  bottom: -5px;
-  width: 0%;
-  height: 2px;
-  background-color: var(--color-gold);
-  animation: underline 0.8s ease forwards;
-  animation-delay: 0.6s;
-}
 
 /* ===== TEXTE ===== */
 
@@ -43,53 +33,70 @@
   font-size: 14px;
   color: var(--color-silver);
   margin-bottom: 30px;
-  line-height: 1.6;
 }
 
-/* ===== ANIMATIONS (subtiles) ===== */
+/* ===== CERCLES ===== */
 
-.fadeUp {
-  opacity: 0;
-  transform: translateY(15px);
-  animation: fadeUp 0.6s ease forwards;
+.circle {
+  position: absolute;
+  border-radius: 50%;
+  border: 1px solid rgba(26, 58, 92, 0.2);
+  animation: rotateCircle linear infinite;
 }
 
-.delay1 { animation-delay: 0.2s; }
-.delay2 { animation-delay: 0.3s; }
-.delay3 { animation-delay: 0.4s; }
-.delay4 { animation-delay: 0.5s; }
-
-@keyframes fadeUp {
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+/* cercle 1 (gros) */
+.circle1 {
+  width: 500px;
+  height: 500px;
+  top: 10%;
+  right: -150px;
+  animation-duration: 20s;
 }
 
-@keyframes underline {
-  to {
-    width: 100%;
-  }
+/* cercle 2 (moyen) */
+.circle2 {
+  width: 300px;
+  height: 300px;
+  bottom: 10%;
+  left: -100px;
+  animation-duration: 15s;
 }
 
-/* ===== BOUTON ===== */
-
-button {
-  position: relative;
-  overflow: hidden;
+/* cercle 3 (petit) */
+.circle3 {
+  width: 150px;
+  height: 150px;
+  top: 30%;
+  left: 20%;
+  animation-duration: 10s;
 }
 
-button::after {
+/* arc visible */
+.circle::before {
   content: "";
   position: absolute;
   inset: 0;
-  background-color: white;
-  opacity: 0;
-  transition: opacity 0.3s ease;
+  border-radius: 50%;
+  border-top: 2px solid var(--color-cobalt);
 }
 
-button:hover::after {
-  opacity: 0.1;
+/* glow */
+.circle::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  box-shadow: 0 0 40px rgba(26, 58, 92, 0.1);
+}
+
+/* rotation */
+@keyframes rotateCircle {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
 }
 
 /* ===== DESKTOP ===== */

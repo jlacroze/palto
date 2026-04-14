@@ -1,5 +1,5 @@
 .team {
-  background-color: white; /* 🔥 changé */
+  background-color: white;
   padding: 60px 20px;
   display: flex;
   justify-content: center;
@@ -21,8 +21,32 @@
   gap: 30px;
 }
 
+/* ===== CARDS ===== */
+
 .card {
   text-align: center;
+  transition: transform 0.3s ease;
+}
+
+/* animation */
+.reveal .card {
+  opacity: 0;
+  transform: translateY(20px);
+}
+
+.reveal-visible .card {
+  opacity: 1;
+  transform: translateY(0);
+  transition: all 0.6s ease;
+}
+
+.reveal-visible .card:nth-child(1) { transition-delay: 0.1s; }
+.reveal-visible .card:nth-child(2) { transition-delay: 0.3s; }
+.reveal-visible .card:nth-child(3) { transition-delay: 0.5s; }
+
+/* hover premium */
+.card:hover {
+  transform: translateY(-5px);
 }
 
 .avatar {
@@ -31,6 +55,11 @@
   margin: 0 auto 15px;
   border-radius: 50%;
   background-color: var(--color-slate);
+  transition: transform 0.3s ease;
+}
+
+.card:hover .avatar {
+  transform: scale(1.05);
 }
 
 .card h3 {
@@ -43,7 +72,8 @@
   color: var(--color-silver);
 }
 
-/* desktop */
+/* ===== DESKTOP ===== */
+
 @media (min-width: 768px) {
   .team {
     padding: 100px 40px;

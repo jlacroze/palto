@@ -5,17 +5,22 @@ export default function Hero() {
   const [ref, visible] = useReveal();
 
   return (
-    <section
-      id="home"
-      ref={ref}
-      className={`${styles.hero} ${
-        visible ? "reveal-visible" : "reveal"
-      }`}
-    >
-      <div className={styles.content}>
-        <p className="label">Cabinet de conseil</p>
+    <section id="home" className={styles.hero}>
+      
+      {/* cercles animés */}
+      <div className={`${styles.circle} ${styles.circle1}`}></div>
+      <div className={`${styles.circle} ${styles.circle2}`}></div>
+      <div className={`${styles.circle} ${styles.circle3}`}></div>
 
-        <h1>
+      <div
+        ref={ref}
+        className={`${styles.content} ${
+          visible ? "reveal-visible" : "reveal"
+        }`}
+      >
+        <p className="label ">Cabinet de conseil</p>
+
+        <h1 className="section-title">
           Excellence<br />
           <span className={styles.highlight}>& stratégie</span>
         </h1>
