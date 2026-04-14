@@ -6,6 +6,13 @@ export default function Team() {
 
   return (
     <section id="team" className={styles.team}>
+      
+      {/* cercles */}
+      <div className={`${styles.circle} ${styles.circle1}`}></div>
+      <div className={`${styles.circle} ${styles.circle2}`}></div>
+      <div className={`${styles.circle} ${styles.circleCenter1}`}></div>
+      <div className={`${styles.circle} ${styles.circleCenter2}`}></div>
+
       <div
         ref={ref}
         className={`${styles.inner} ${
@@ -14,7 +21,9 @@ export default function Team() {
       >
         <p className="label">Équipe</p>
 
-        <h2 className="section-title">Des experts engagés</h2>
+        <h2 className="section-title">
+          Des experts engagés
+        </h2>
 
         <div className={styles.grid}>
           <div className={styles.card}>

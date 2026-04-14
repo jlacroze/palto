@@ -1,4 +1,6 @@
 .team {
+  position: relative;
+  overflow: hidden;
   background-color: white;
   padding: 60px 20px;
   display: flex;
@@ -8,6 +10,8 @@
 .inner {
   width: 100%;
   text-align: center;
+  position: relative;
+  z-index: 2;
 }
 
 .team h2 {
@@ -28,7 +32,6 @@
   transition: transform 0.3s ease;
 }
 
-/* animation */
 .reveal .card {
   opacity: 0;
   transform: translateY(20px);
@@ -44,32 +47,73 @@
 .reveal-visible .card:nth-child(2) { transition-delay: 0.3s; }
 .reveal-visible .card:nth-child(3) { transition-delay: 0.5s; }
 
-/* hover premium */
 .card:hover {
   transform: translateY(-5px);
 }
 
+/* avatar */
 .avatar {
   width: 80px;
   height: 80px;
   margin: 0 auto 15px;
   border-radius: 50%;
   background-color: var(--color-slate);
-  transition: transform 0.3s ease;
 }
 
-.card:hover .avatar {
-  transform: scale(1.05);
+/* ===== CERCLES ===== */
+
+.circle {
+  position: absolute;
+  border-radius: 50%;
+  border: 1px solid rgba(26, 58, 92, 0.15);
+  animation: rotateCircle linear infinite;
 }
 
-.card h3 {
-  font-size: 18px;
-  margin-bottom: 5px;
+.circle::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  border-top: 2px solid var(--color-cobalt);
 }
 
-.card p {
-  font-size: 14px;
-  color: var(--color-silver);
+.circle1 {
+  width: 220px;
+  height: 220px;
+  top: 10%;
+  left: -100px;
+  animation-duration: 16s;
+}
+
+.circle2 {
+  width: 140px;
+  height: 140px;
+  bottom: 10%;
+  right: -60px;
+  animation-duration: 12s;
+}
+
+.circleCenter1 {
+  width: 140px;
+  height: 140px;
+  top: 45%;
+  left: 40%;
+  opacity: 0.05;
+  animation-duration: 12s;
+}
+
+.circleCenter2 {
+  width: 100px;
+  height: 100px;
+  top: 65%;
+  right: 35%;
+  opacity: 0.04;
+  animation-duration: 9s;
+}
+
+@keyframes rotateCircle {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
 }
 
 /* ===== DESKTOP ===== */

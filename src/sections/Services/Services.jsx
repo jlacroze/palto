@@ -6,6 +6,13 @@ export default function Services() {
 
   return (
     <section id="services" className={styles.services}>
+      
+      {/* cercles */}
+      <div className={`${styles.circle} ${styles.circle1}`}></div>
+      <div className={`${styles.circle} ${styles.circle2}`}></div>
+      <div className={`${styles.circle} ${styles.circleCenter1}`}></div>
+      <div className={`${styles.circle} ${styles.circleCenter2}`}></div>
+
       <div
         ref={ref}
         className={`${styles.inner} ${

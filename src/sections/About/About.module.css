@@ -1,6 +1,8 @@
 .about {
-  padding: 60px 20px;
+  position: relative;
+  overflow: hidden;
   background-color: var(--color-cream);
+  padding: 60px 20px;
   display: flex;
   justify-content: center;
 }
@@ -8,18 +10,8 @@
 .inner {
   max-width: 800px;
   text-align: center;
-}
-
-/* animation */
-.reveal {
-  opacity: 0;
-  transform: translateY(20px) scale(0.97);
-}
-
-.reveal-visible {
-  opacity: 1;
-  transform: translateY(0) scale(1);
-  transition: all 0.8s ease;
+  position: relative;
+  z-index: 2;
 }
 
 .about h2 {
@@ -31,6 +23,54 @@
   color: var(--color-silver);
   line-height: 1.7;
   margin-bottom: 20px;
+}
+
+/* ===== CERCLES ===== */
+
+.circle {
+  position: absolute;
+  border-radius: 50%;
+  border: 1px solid rgba(26, 58, 92, 0.15);
+  animation: rotateCircle linear infinite;
+}
+
+.circle::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  border-top: 2px solid var(--color-cobalt);
+}
+
+.circle1 {
+  width: 200px;
+  height: 200px;
+  top: 10%;
+  left: -80px;
+  animation-duration: 18s;
+}
+
+.circle2 {
+  width: 120px;
+  height: 120px;
+  bottom: 10%;
+  right: -40px;
+  animation-duration: 12s;
+}
+
+.circleCenter {
+  width: 160px;
+  height: 160px;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  opacity: 0.05;
+  animation-duration: 16s;
+}
+
+@keyframes rotateCircle {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
 }
 
 /* ===== DESKTOP ===== */
