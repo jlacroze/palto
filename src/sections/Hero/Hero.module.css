@@ -1,27 +1,46 @@
 .hero {
-  height: 100vh;
+  min-height: 100vh;
   background-color: var(--color-cream);
   color: var(--color-ink);
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 0 40px;
-}
-
-.content {
-  max-width: 700px;
+  padding: 40px 20px;
   text-align: center;
 }
 
+.content {
+  max-width: 100%;
+}
+
 .hero h1 {
-  font-size: 56px;
-  line-height: 1.1;
+  font-size: 32px;
+  line-height: 1.2;
   margin: 20px 0;
-  color: var(--color-ink);
 }
 
 .subtitle {
+  font-size: 14px;
   color: var(--color-silver);
   margin-bottom: 30px;
   line-height: 1.6;
+}
+
+/* ===== DESKTOP ===== */
+@media (min-width: 768px) {
+  .hero {
+    padding: 0 40px;
+  }
+
+  .content {
+    max-width: 700px;
+  }
+
+  .hero h1 {
+    font-size: 56px;
+  }
+
+  .subtitle {
+    font-size: 16px;
+  }
 }
