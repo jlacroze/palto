@@ -136,3 +136,16 @@
     gap: 40px;
   }
 }
+/* ===== POLISH TEAM ===== */
+
+.card {
+  transition: all 0.3s ease;
+}
+
+.card:hover {
+  transform: translateY(-6px);
+}
+
+.avatar {
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+}

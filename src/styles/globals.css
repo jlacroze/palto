@@ -101,3 +101,26 @@ h2 {
 .reveal-visible .section-title::after {
   width: 100%;
 }
+/* ===== POLISH FINAL ===== */
+
+/* spacing premium */
+section {
+  min-height: 100vh;
+  padding: 100px 20px;
+}
+
+/* container cohérent */
+.inner {
+  margin: 0 auto;
+}
+
+/* animation plus fluide */
+.reveal-visible {
+  will-change: transform, opacity;
+}
+
+/* bouton premium */
+.button-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+}

@@ -84,3 +84,12 @@
     font-size: 36px;
   }
 }
+/* ===== POLISH TYPO ===== */
+
+.text {
+  font-size: 15px;
+  line-height: 1.8;
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+}
