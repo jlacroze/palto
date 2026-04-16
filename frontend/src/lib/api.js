@@ -1,11 +1,6 @@
-const API_URL =
-  import.meta.env.MODE === "development"
-    ? "http://localhost:1337"
-    : null;
+const API_URL = import.meta.env.VITE_API_URL;
 
 export const fetchPage = async () => {
-  if (!API_URL) return null;
-
   try {
     const res = await fetch(`${API_URL}/api/pages?populate=*`);
     return await res.json();
