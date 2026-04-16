@@ -1,21 +1,28 @@
+import { lazy, Suspense } from "react";
+
 import Navbar from "./components/Navbar/Navbar";
 import Hero from "./sections/Hero/Hero";
-import Services from "./sections/Services/Services";
-import About from "./sections/About/About";
-import Team from "./sections/Team/Team";
-import Contact from "./sections/Contact/Contact";
-import Footer from "./sections/Footer/Footer";
+
+// 🔥 Lazy load des sections
+const About = lazy(() => import("./sections/About/About"));
+const Services = lazy(() => import("./sections/Services/Services"));
+const Team = lazy(() => import("./sections/Team/Team"));
+const Contact = lazy(() => import("./sections/Contact/Contact"));
+const Footer = lazy(() => import("./sections/Footer/Footer"));
 
 function App() {
   return (
     <>
       <Navbar />
       <Hero />
-      <About />
-      <Services />
-      <Team />
-      <Contact />
-      <Footer />
+
+      <Suspense fallback={null}>
+        <About />
+        <Services />
+        <Team />
+        <Contact />
+        <Footer />
+      </Suspense>
     </>
   );
 }
