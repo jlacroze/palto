@@ -1,6 +1,6 @@
 import styles from "./Hero.module.css";
-import heroImage from "../../assets/bg_hero.avif";
-import logo from "../../assets/logo_white.png";
+import heroFallback from "../../assets/bg_hero.avif";
+import logoFallback from "../../assets/logo_white.png";
 import { usePage } from "../../hooks/usePage";
 
 export default function Hero() {
@@ -18,22 +18,26 @@ export default function Hero() {
 
   const heroData = hero || fallbackHero;
 
-  // 🔥 IMAGE DYNAMIQUE (FIX PROD ⚠️)
-  const imageUrl =
-    hero?.image?.url
-      ? `${import.meta.env.VITE_API_URL}${hero.image.url}`
-      : heroImage;
+  // ✅ BACKGROUND (nouveau champ)
+  const backgroundUrl =
+    hero?.background?.url
+      ? `${import.meta.env.VITE_API_URL}${hero.background.url}`
+      : heroFallback;
+
+  // ✅ LOGO (nouveau champ)
+  const logoUrl =
+    hero?.logo?.url
+      ? `${import.meta.env.VITE_API_URL}${hero.logo.url}`
+      : logoFallback;
 
   return (
     <section id="home" className={styles.hero}>
       
-      {/* IMAGE LCP */}
+      {/* BACKGROUND */}
       <img
-        src={imageUrl}
+        src={backgroundUrl}
         alt="PALTO background"
         className={styles.bgImage}
-        loading="eager"
-        fetchpriority="high"
       />
 
       {/* LIGNES */}
@@ -48,7 +52,7 @@ export default function Hero() {
 
       {/* CONTENT */}
       <div className={styles.content}>
-        <img src={logo} alt="PALTO" className={styles.logo} />
+        <img src={logoUrl} alt="PALTO" className={styles.logo} />
 
         <h1 className={styles.title}>
           {heroData.title}
