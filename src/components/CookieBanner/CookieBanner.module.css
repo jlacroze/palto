@@ -1,0 +1,40 @@
+.banner {
+  position: fixed;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+
+  background: var(--color-ink);
+  color: white;
+
+  padding: 16px 20px;
+  border-radius: 12px;
+
+  display: flex;
+  align-items: center;
+  gap: 20px;
+
+  z-index: 9999;
+
+  box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+}
+
+.actions {
+  display: flex;
+  gap: 10px;
+}
+
+.accept {
+  background: var(--color-gold);
+  border: none;
+  padding: 8px 14px;
+  cursor: pointer;
+}
+
+.decline {
+  background: transparent;
+  border: 1px solid white;
+  color: white;
+  padding: 8px 14px;
+  cursor: pointer;
+}

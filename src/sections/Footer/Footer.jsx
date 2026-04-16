@@ -1,7 +1,7 @@
 import styles from "./Footer.module.css";
 import logo from "../../assets/logo.png";
 
-export default function Footer() {
+export default function Footer({ onOpenLegal }) {
   return (
     <footer className={styles.footer}>
       
@@ -20,7 +20,13 @@ export default function Footer() {
 
         {/* RIGHT */}
         <div className={styles.right}>
-          <a href="#">Mentions légales</a>
+          <button
+            onClick={onOpenLegal}
+            className={styles.link}
+          >
+            Mentions légales
+          </button>
+
           <p>© {new Date().getFullYear()} PALTO</p>
         </div>
 

@@ -97,11 +97,6 @@
   transition: all 0.4s ease;
 }
 
-/* petit effet premium */
-.formContainer:hover {
-  transform: translateY(-5px);
-}
-
 /* ===== HEADER ===== */
 
 .header {
@@ -182,14 +177,11 @@ textarea:focus {
 .button {
   margin-top: 10px;
   padding: 16px;
-
   background-color: transparent;
   border: 1px solid var(--color-gold);
-
   color: var(--color-ink);
   letter-spacing: 2px;
   cursor: pointer;
-
   transition: all 0.3s ease;
 }
 

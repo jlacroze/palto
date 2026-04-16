@@ -103,14 +103,11 @@
 .grid {
   position: relative;
   z-index: 2;
-
   max-width: 1200px;
   margin: 0 auto;
-
   display: grid;
   grid-template-columns: 1fr;
   gap: 25px;
-
   opacity: 0;
   transform: translateY(50px);
   transition: all 1s ease;
@@ -127,10 +124,9 @@
   position: relative;
   background-color: var(--color-cream);
   padding: 2px;
-
   transform-style: preserve-3d;
   transition: transform 0.2s ease;
-
+  box-shadow: 0 10px 30px rgba(0,0,0,0.2);
   overflow: hidden;
 }
 
@@ -160,7 +156,6 @@
 .cardInner {
   background-color: var(--color-cream);
   padding: 30px;
-
   display: flex;
   flex-direction: column;
   gap: 15px;

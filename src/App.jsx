@@ -1,8 +1,11 @@
-import { lazy, Suspense } from "react";
+import { lazy, Suspense, useState } from "react";
 
 import Navbar from "./components/Navbar/Navbar";
 import Hero from "./sections/Hero/Hero";
-import About from "./sections/About/About"; // ✅ important = pas lazy
+import About from "./sections/About/About";
+
+import CookieBanner from "./components/CookieBanner/CookieBanner";
+import LegalModal from "./components/LegalModal/LegalModal";
 
 const Services = lazy(() => import("./sections/Services/Services"));
 const Team = lazy(() => import("./sections/Team/Team"));
@@ -10,6 +13,8 @@ const Contact = lazy(() => import("./sections/Contact/Contact"));
 const Footer = lazy(() => import("./sections/Footer/Footer"));
 
 function App() {
+  const [isLegalOpen, setIsLegalOpen] = useState(false);
+
   return (
     <>
       <Navbar />
@@ -20,8 +25,15 @@ function App() {
         <Services />
         <Team />
         <Contact />
-        <Footer />
+        <Footer onOpenLegal={() => setIsLegalOpen(true)} />
       </Suspense>
+
+      <CookieBanner />
+
+      <LegalModal
+        isOpen={isLegalOpen}
+        onClose={() => setIsLegalOpen(false)}
+      />
     </>
   );
 }
