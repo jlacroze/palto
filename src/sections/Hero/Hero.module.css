@@ -1,108 +1,76 @@
 .hero {
   position: relative;
-  overflow: hidden;
-
   min-height: 100vh;
-  background-color: var(--color-cream);
-  color: var(--color-ink);
+
+  background-size: cover;
+  background-position: center;
 
   display: flex;
   align-items: center;
   justify-content: center;
   padding: 40px 20px;
-  text-align: center;
 }
 
-.content {
-  position: relative;
-  z-index: 2;
-  max-width: 700px;
+/* ===== CARD PREMIUM ===== */
+
+.card {
+  background: rgba(247, 244, 238, 0.9); /* crème */
+  backdrop-filter: blur(6px);
+
+  padding: 40px 30px;
+  max-width: 600px;
+  text-align: center;
+
+  border: 1px solid rgba(0, 0, 0, 0.05);
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
 }
 
 /* ===== TITRE ===== */
 
-.hero h1 {
-  font-size: 32px;
+.title {
+  position: relative;
+  font-size: 34px;
   margin: 20px 0;
 }
 
+/* ligne dorée animée */
+.title::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%) scaleX(0);
+  transform-origin: center;
+
+  bottom: -8px;
+  width: 80px;
+  height: 2px;
+  background-color: var(--color-gold);
+
+  transition: transform 0.6s ease;
+}
+
+/* animation au scroll */
+.reveal-visible .title::after {
+  transform: translateX(-50%) scaleX(1);
+}
 
 /* ===== TEXTE ===== */
 
 .subtitle {
-  font-size: 14px;
   color: var(--color-silver);
+  font-size: 14px;
   margin-bottom: 30px;
-}
-
-/* ===== CERCLES ===== */
-
-.circle {
-  position: absolute;
-  border-radius: 50%;
-  border: 1px solid rgba(26, 58, 92, 0.2);
-  animation: rotateCircle linear infinite;
-}
-
-/* cercle 1 (gros) */
-.circle1 {
-  width: 500px;
-  height: 500px;
-  top: 10%;
-  right: -150px;
-  animation-duration: 20s;
-}
-
-/* cercle 2 (moyen) */
-.circle2 {
-  width: 300px;
-  height: 300px;
-  bottom: 10%;
-  left: -100px;
-  animation-duration: 15s;
-}
-
-/* cercle 3 (petit) */
-.circle3 {
-  width: 150px;
-  height: 150px;
-  top: 30%;
-  left: 20%;
-  animation-duration: 10s;
-}
-
-/* arc visible */
-.circle::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  border-radius: 50%;
-  border-top: 2px solid var(--color-cobalt);
-}
-
-/* glow */
-.circle::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  border-radius: 50%;
-  box-shadow: 0 0 40px rgba(26, 58, 92, 0.1);
-}
-
-/* rotation */
-@keyframes rotateCircle {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+  line-height: 1.6;
 }
 
 /* ===== DESKTOP ===== */
 
 @media (min-width: 768px) {
-  .hero h1 {
+  .card {
+    padding: 60px;
+  }
+
+  .title {
     font-size: 56px;
   }
 

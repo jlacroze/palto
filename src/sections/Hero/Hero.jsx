@@ -1,28 +1,27 @@
 import styles from "./Hero.module.css";
 import useReveal from "../../hooks/useReveal";
+import heroImage from "../../assets/bg_hero.jpg";
 
 export default function Hero() {
   const [ref, visible] = useReveal();
 
   return (
-    <section id="home" className={styles.hero}>
-      
-      {/* cercles animés */}
-      <div className={`${styles.circle} ${styles.circle1}`}></div>
-      <div className={`${styles.circle} ${styles.circle2}`}></div>
-      <div className={`${styles.circle} ${styles.circle3}`}></div>
-
+    <section
+      id="home"
+      className={styles.hero}
+      style={{ backgroundImage: `url(${heroImage})` }}
+    >
       <div
         ref={ref}
-        className={`${styles.content} ${
+        className={`${styles.card} ${
           visible ? "reveal-visible" : "reveal"
         }`}
       >
-        <p className="label ">Cabinet de conseil</p>
+        <p className="label">Cabinet de conseil</p>
 
-        <h1 className="section-title">
+        <h1 className={styles.title}>
           Excellence<br />
-          <span className={styles.highlight}>& stratégie</span>
+          & stratégie
         </h1>
 
         <p className={styles.subtitle}>
