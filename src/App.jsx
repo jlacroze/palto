@@ -2,9 +2,8 @@ import { lazy, Suspense } from "react";
 
 import Navbar from "./components/Navbar/Navbar";
 import Hero from "./sections/Hero/Hero";
+import About from "./sections/About/About"; // ✅ important = pas lazy
 
-// 🔥 Lazy load des sections
-const About = lazy(() => import("./sections/About/About"));
 const Services = lazy(() => import("./sections/Services/Services"));
 const Team = lazy(() => import("./sections/Team/Team"));
 const Contact = lazy(() => import("./sections/Contact/Contact"));
@@ -15,9 +14,9 @@ function App() {
     <>
       <Navbar />
       <Hero />
+      <About />
 
-      <Suspense fallback={null}>
-        <About />
+      <Suspense fallback={<div style={{ height: "200px" }} />}>
         <Services />
         <Team />
         <Contact />
