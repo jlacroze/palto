@@ -11,7 +11,9 @@ export default function Hero() {
     const loadData = async () => {
       const res = await fetchPage();
 
-      const sections = res.data[0].sections;
+      if (!res) return; // 🔥 évite crash en prod
+
+      const sections = res.data?.[0]?.sections || [];
 
       const heroData = sections.find(
         (section) => section.__component === "sections.hero"
@@ -22,6 +24,14 @@ export default function Hero() {
 
     loadData();
   }, []);
+
+  // 🔥 FALLBACK (PROD SAFE)
+  const fallbackHero = {
+    title: "Excellence & stratégie",
+    subtitle: "Votre partenaire digital",
+  };
+
+  const heroData = hero || fallbackHero;
 
   // 🔥 IMAGE DYNAMIQUE + FALLBACK
   const imageUrl =
@@ -56,10 +66,10 @@ export default function Hero() {
         <img src={logo} alt="PALTO" className={styles.logo} />
 
         <h1 className={styles.title}>
-          {hero ? hero.title : "Loading..."}
+          {heroData.title}
         </h1>
 
-        {hero && <p>{hero.subtitle}</p>}
+        <p>{heroData.subtitle}</p>
       </div>
     </section>
   );
