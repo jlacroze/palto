@@ -18,16 +18,16 @@ export default function Hero() {
 
   const heroData = hero || fallbackHero;
 
-  // ✅ BACKGROUND (nouveau champ)
+  // ✅ BACKGROUND (FIX STRAPI CLOUD)
   const backgroundUrl =
     hero?.background?.url
-      ? `${import.meta.env.VITE_API_URL}${hero.background.url}`
+      ? hero.background.url
       : heroFallback;
 
-  // ✅ LOGO (nouveau champ)
+  // ✅ LOGO (FIX STRAPI CLOUD)
   const logoUrl =
     hero?.logo?.url
-      ? `${import.meta.env.VITE_API_URL}${hero.logo.url}`
+      ? hero.logo.url
       : logoFallback;
 
   return (
