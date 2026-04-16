@@ -1,8 +1,77 @@
 /* ===== SECTION ===== */
 
 .section {
+  position: relative;
   background-color: var(--color-cream);
   padding: 60px 20px;
+  overflow: hidden;
+}
+
+/* ===== LIGNES BACKGROUND ===== */
+
+.lines {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+}
+
+.line {
+  position: absolute;
+  left: 0;
+  width: 0%;
+  height: 1px;
+
+  background: linear-gradient(
+    to right,
+    transparent,
+    var(--color-cobalt),
+    transparent
+  );
+
+  opacity: 0.3;
+
+  animation: drawLine 4s ease-in-out infinite;
+}
+
+/* position des lignes */
+.line:nth-child(1) { top: 10%; }
+.line:nth-child(2) { top: 20%; }
+.line:nth-child(3) { top: 30%; }
+.line:nth-child(4) { top: 45%; }
+.line:nth-child(5) { top: 55%; }
+.line:nth-child(6) { top: 65%; }
+.line:nth-child(7) { top: 75%; }
+.line:nth-child(8) { top: 85%; }
+
+/* animation */
+@keyframes drawLine {
+  0% {
+    width: 0%;
+    opacity: 0;
+  }
+  20% {
+    opacity: 0.5;
+  }
+  50% {
+    width: 100%;
+    opacity: 0.3;
+  }
+  80% {
+    opacity: 0.5;
+  }
+  100% {
+    width: 0%;
+    opacity: 0;
+  }
+}
+
+/* ===== CONTENU ===== */
+
+.topInner,
+.visual {
+  position: relative;
+  z-index: 2;
 }
 
 /* ===== TOP TEXT ===== */
@@ -106,6 +175,9 @@
   opacity: 0;
   transform: translateX(80px);
   transition: all 1.2s ease 0.3s;
+
+  position: relative;
+  z-index: 2;
 }
 
 .cardVisible {
@@ -141,38 +213,7 @@
   background-color: var(--color-gold);
 }
 
-/* ========================= */
-/* ===== MOBILE FIX ONLY ===== */
-/* ========================= */
-
-@media (max-width: 1024px) {
-  .section {
-    display: flex;
-    flex-direction: column;
-  }
-
-  .topInner {
-    order: 1; /* texte en premier */
-  }
-
-  .visual {
-    order: 2;
-    display: flex;
-    flex-direction: column;
-  }
-
-  .imageWrapper {
-    order: 1;
-  }
-
-  .card {
-    order: 2;
-  }
-}
-
-/* ========================= */
-/* ===== TABLET ===== */
-/* ========================= */
+/* ===== RESPONSIVE ===== */
 
 @media (min-width: 768px) {
   .section {
@@ -188,10 +229,6 @@
   }
 }
 
-/* ========================= */
-/* ===== DESKTOP (UNCHANGED) ===== */
-/* ========================= */
-
 @media (min-width: 1024px) {
   .section {
     padding: 100px 20px;
@@ -202,7 +239,6 @@
   }
 
   .visual {
-    position: relative;
     max-width: 1200px;
     margin: 0 auto;
   }

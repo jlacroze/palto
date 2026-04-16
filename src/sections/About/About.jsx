@@ -8,6 +8,17 @@ export default function About() {
   return (
     <section id="about" className={styles.section}>
       
+      {/* ===== LIGNES BACKGROUND ===== */}
+      <div className={styles.lines}>
+        {[...Array(8)].map((_, i) => (
+          <span
+            key={i}
+            className={styles.line}
+            style={{ animationDelay: `${i * 0.6}s` }}
+          />
+        ))}
+      </div>
+
       {/* ===== TOP TEXT ===== */}
       <div
         ref={ref}
@@ -34,8 +45,6 @@ export default function About() {
 
       {/* ===== VISUAL ===== */}
       <div className={styles.visual}>
-        
-        {/* IMAGE */}
         <div className={styles.imageWrapper}>
           <img
             src={image}
@@ -46,7 +55,6 @@ export default function About() {
           />
         </div>
 
-        {/* CARD */}
         <div
           className={`${styles.card} ${
             visible ? styles.cardVisible : ""
