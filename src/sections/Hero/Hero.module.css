@@ -73,7 +73,12 @@
   animation-delay: 4s;
 }
 h1 {
-  visibility: hidden;}
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+}
+
 @keyframes lineFloat {
   0% {
     opacity: 0;
