@@ -1,3 +1,5 @@
+/* ===== HERO ===== */
+
 .hero {
   position: relative;
   min-height: 100vh;
@@ -8,56 +10,27 @@
 
   padding: 40px 20px;
   overflow: hidden;
+
+  opacity: 0;
+  transition: opacity 0.8s ease;
 }
 
-/* ===== BACKGROUND IMAGE ===== */
+.loaded {
+  opacity: 1;
+}
 
-.bg {
+/* 🔥 IMAGE LCP */
+
+.bgImage {
   position: absolute;
   inset: 0;
   width: 100%;
   height: 100%;
   object-fit: cover;
-
   z-index: 0;
-
-  opacity: 0;
-  transition: opacity 0.8s ease;
-}
-.title {
-  visibility: hidden;
-}
-.loaded {
-  opacity: 1;
 }
 
-/* ===== DIAGONALE PREMIUM ===== */
-
-.diagonal {
-  position: absolute;
-  top: -100%;
-  left: 0;
-
-  width: 100%;
-  height: 80%;
-
-  background: linear-gradient(
-    120deg,
-    rgba(14, 17, 23, 0.85),
-    rgba(14, 17, 23, 0.65)
-  );
-
-  clip-path: polygon(0 0, 100% 0, 100% 70%, 0 90%);
-  z-index: 1;
-
-  transition: top 1.2s ease;
-}
-
-.diagonalVisible {
-  top: 0;
-}
-
-/* ===== LIGNES ANIMÉES ===== */
+/* ===== LIGNES ===== */
 
 .lines {
   position: absolute;
@@ -72,7 +45,7 @@
   background: linear-gradient(
     to right,
     transparent,
-    rgba(255, 255, 255, 0.4),
+    rgba(255,255,255,0.4),
     transparent
   );
 
@@ -99,7 +72,8 @@
   width: 50%;
   animation-delay: 4s;
 }
-
+h1 {
+  visibility: hidden;}
 @keyframes lineFloat {
   0% {
     opacity: 0;
@@ -115,11 +89,33 @@
   }
 }
 
+/* ===== DIAGONALE ===== */
+
+.diagonal {
+  position: absolute;
+  top: -100%;
+  left: 0;
+
+  width: 100%;
+  height: 80%;
+
+  background: rgba(14, 17, 23, 0.65);
+
+  clip-path: polygon(0 0, 100% 0, 100% 70%, 0 90%);
+  z-index: 2;
+
+  transition: top 1.2s ease;
+}
+
+.loaded .diagonal {
+  top: 0;
+}
+
 /* ===== CONTENT ===== */
 
 .content {
   position: relative;
-  z-index: 2;
+  z-index: 3;
 
   display: flex;
   flex-direction: column;
@@ -129,11 +125,12 @@
   color: white;
 
   opacity: 0;
-  transform: translateY(40px);
-  transition: all 0.8s ease;
+  transform: translateY(30px);
+  transition: all 0.8s ease 0.6s;
 }
 
-.visible {
+.visible,
+.loaded .content {
   opacity: 1;
   transform: translateY(0);
 }
@@ -141,19 +138,17 @@
 /* ===== LOGO ===== */
 
 .logo {
-  width: 120px;
+  width: auto;
   margin-bottom: 20px;
 }
 
 /* ===== TITLE ===== */
 
 .title {
-  font-size: clamp(32px, 5vw, 56px);
-  font-weight: 600;
   position: relative;
 }
 
-/* underline */
+/* underline gold */
 
 .title::after {
   content: "";
@@ -166,17 +161,17 @@
   height: 2px;
   background-color: var(--color-gold);
 
-  transition: transform 0.6s ease 0.5s;
+  transition: transform 0.6s ease 1s;
 }
 
-.visible .title::after {
+.loaded .title::after {
   transform: translateX(-50%) scaleX(1);
 }
 
-/* ===== RESPONSIVE ===== */
+/* ===== DESKTOP ===== */
 
 @media (min-width: 768px) {
-  .logo {
-    width: auto;
+  .title {
+    font-size: 56px;
   }
 }
