@@ -10,6 +10,12 @@ export default function Team() {
   return (
     <section id="team" className={styles.section}>
       
+      {/* LIGNES */}
+      <div className={styles.lines}>
+        <span />
+        <span />
+      </div>
+
       {/* HEADER */}
       <div className={styles.header}>
         <p className="label">Équipe</p>

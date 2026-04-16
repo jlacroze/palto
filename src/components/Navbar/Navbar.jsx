@@ -15,6 +15,7 @@ export default function Navbar() {
     { label: "À propos", id: "about" },
     { label: "Services", id: "services" },
     { label: "Équipe", id: "team" },
+    { label: "Contact", id: "contact" },
   ];
 
   // lock scroll

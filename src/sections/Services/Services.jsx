@@ -29,10 +29,10 @@ export default function Services() {
     const x = e.clientX - rect.left;
     const y = e.clientY - rect.top;
 
-    const rotateX = (y / rect.height - 0.5) * -12;
-    const rotateY = (x / rect.width - 0.5) * 12;
+    const rotateX = (y / rect.height - 0.5) * -10;
+    const rotateY = (x / rect.width - 0.5) * 10;
 
-    el.style.transform = `rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale(1.03)`;
+    el.style.transform = `rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale(1.02)`;
 
     el.style.setProperty("--x", `${x}px`);
     el.style.setProperty("--y", `${y}px`);
@@ -45,7 +45,13 @@ export default function Services() {
   return (
     <section id="services" className={styles.section}>
       
-      {/* IMAGE FULL RIGHT */}
+      {/* LIGNES */}
+      <div className={styles.lines}>
+        <span />
+        <span />
+      </div>
+
+      {/* IMAGE RIGHT */}
       <div
         className={styles.bgImage}
         style={{ backgroundImage: `url(${bgImage})` }}
@@ -77,10 +83,7 @@ export default function Services() {
           >
             <div className={styles.cardInner}>
               <h3>{service.title}</h3>
-
-              <p className={styles.desc}>
-                {service.desc}
-              </p>
+              <p className={styles.desc}>{service.desc}</p>
             </div>
           </div>
         ))}
