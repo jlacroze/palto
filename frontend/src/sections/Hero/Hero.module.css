@@ -1,0 +1,175 @@
+/* ===== HERO ===== */
+
+.hero {
+  position: relative;
+  min-height: 100vh;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  overflow: hidden;
+}
+
+/* ===== IMAGE ===== */
+
+.bgImage {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 0;
+}
+
+/* ===== LIGNES ===== */
+
+.lines {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+}
+
+.lines span {
+  position: absolute;
+  height: 1px;
+  background: linear-gradient(
+    to right,
+    transparent,
+    rgba(255,255,255,0.4),
+    transparent
+  );
+
+  opacity: 0.2;
+  animation: lineFloat 8s ease-in-out infinite;
+}
+
+.lines span:nth-child(1) {
+  top: 30%;
+  left: 10%;
+  width: 60%;
+}
+
+.lines span:nth-child(2) {
+  top: 55%;
+  left: 20%;
+  width: 40%;
+  animation-delay: 2s;
+}
+
+.lines span:nth-child(3) {
+  top: 75%;
+  left: 5%;
+  width: 50%;
+  animation-delay: 4s;
+}
+
+@keyframes lineFloat {
+  0% {
+    opacity: 0;
+    transform: scaleX(0.6);
+  }
+  50% {
+    opacity: 0.25;
+    transform: scaleX(1);
+  }
+  100% {
+    opacity: 0;
+    transform: scaleX(0.6);
+  }
+}
+
+/* ===== DIAGONALE ===== */
+
+.diagonal {
+  position: absolute;
+  top: 0;
+  left: 0;
+
+  width: 100%;
+  height: 80%;
+
+  background: rgba(14, 17, 23, 0.65);
+  clip-path: polygon(0 0, 100% 0, 100% 70%, 0 90%);
+  z-index: 2;
+
+  /* animation SAFE */
+  animation: slideIn 1s ease;
+}
+
+@keyframes slideIn {
+  from {
+    transform: translateY(-30px);
+    opacity: 0.8;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+/* ===== CONTENT ===== */
+
+.content {
+  position: relative;
+  z-index: 3;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+
+  color: white;
+}
+
+/* ===== LOGO ===== */
+
+.logo {
+  height: 60px;
+  margin-bottom: 20px;
+
+  animation: fadeSoft 1s ease;
+}
+
+/* ===== TITLE ===== */
+
+.title {
+  position: relative;
+
+  animation: fadeSoft 1.2s ease;
+}
+
+/* underline gold */
+
+.title::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  bottom: -8px;
+  width: 60px;
+  height: 2px;
+  background-color: var(--color-gold);
+}
+
+/* ===== ANIMATION SAFE ===== */
+
+@keyframes fadeSoft {
+  from {
+    opacity: 0.6;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ===== DESKTOP ===== */
+
+@media (min-width: 768px) {
+  .title {
+    font-size: 56px;
+  }
+}
