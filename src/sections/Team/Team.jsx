@@ -1,49 +1,65 @@
 import styles from "./Team.module.css";
 import useReveal from "../../hooks/useReveal";
 
+import member1 from "../../assets/bg_hero.jpg";
+import member2 from "../../assets/bg_hero.jpg";
+
+const team = [
+  {
+    name: "Jean Dupont",
+    role: "Fondateur & Consultant",
+    image: member1,
+  },
+  {
+    name: "Marie Martin",
+    role: "Responsable Stratégie",
+    image: member2,
+  },
+];
+
 export default function Team() {
   const [ref, visible] = useReveal();
 
   return (
-    <section id="team" className={styles.team}>
+    <section id="team" className={styles.section}>
       
-      {/* cercles */}
-      <div className={`${styles.circle} ${styles.circle1}`}></div>
-      <div className={`${styles.circle} ${styles.circle2}`}></div>
-      <div className={`${styles.circle} ${styles.circleCenter1}`}></div>
-      <div className={`${styles.circle} ${styles.circleCenter2}`}></div>
+      {/* HEADER */}
+      <div className={styles.header}>
+        <p className="label">Équipe</p>
+        <h2 className={styles.heading}>
+          Les talents derrière<br />PALTO
+        </h2>
+      </div>
 
+      {/* BACKGROUND LINES */}
+      <div className={styles.lines}>
+        <span className={styles.line} />
+        <span className={styles.line} />
+        <span className={styles.line} />
+      </div>
+
+      {/* TEAM */}
       <div
         ref={ref}
-        className={`${styles.inner} ${
-          visible ? "reveal-visible" : "reveal"
-        }`}
+        className={`${styles.grid} ${visible ? styles.show : ""}`}
       >
-        <p className="label">Équipe</p>
+        {team.map((member, index) => (
+          <div
+            key={index}
+            className={styles.card}
+            style={{ transitionDelay: `${index * 0.2}s` }}
+          >
+            <div className={styles.imageWrapper}>
+              <img src={member.image} alt={member.name} />
+              <div className={styles.overlay} />
+            </div>
 
-        <h2 className="section-title">
-          Des experts engagés
-        </h2>
-
-        <div className={styles.grid}>
-          <div className={styles.card}>
-            <div className={styles.avatar}></div>
-            <h3>Jean Dupont</h3>
-            <p>Consultant senior</p>
+            <div className={styles.content}>
+              <h3>{member.name}</h3>
+              <p>{member.role}</p>
+            </div>
           </div>
-
-          <div className={styles.card}>
-            <div className={styles.avatar}></div>
-            <h3>Marie Martin</h3>
-            <p>Stratégie</p>
-          </div>
-
-          <div className={styles.card}>
-            <div className={styles.avatar}></div>
-            <h3>Lucas Bernard</h3>
-            <p>Transformation digitale</p>
-          </div>
-        </div>
+        ))}
       </div>
     </section>
   );
