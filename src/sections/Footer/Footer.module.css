@@ -1,0 +1,168 @@
+/* ===== FOOTER ===== */
+
+.footer {
+  position: relative;
+  padding: 60px 20px 30px;
+  background-color: var(--color-ink);
+  color: white;
+  overflow: hidden;
+}
+
+/* ===== LIGNES ANIMÉES ===== */
+
+.lines {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.lines span {
+  position: absolute;
+  height: 1px;
+  background: linear-gradient(
+    to right,
+    transparent,
+    rgba(255,255,255,0.2),
+    transparent
+  );
+  opacity: 0.2;
+  animation: lineMove 6s ease-in-out infinite;
+}
+
+.lines span:nth-child(1) {
+  top: 30%;
+  width: 60%;
+  left: 20%;
+}
+
+.lines span:nth-child(2) {
+  top: 70%;
+  width: 40%;
+  left: 30%;
+}
+
+@keyframes lineMove {
+  0% {
+    opacity: 0;
+    transform: scaleX(0.6);
+  }
+  50% {
+    opacity: 0.25;
+    transform: scaleX(1);
+  }
+  100% {
+    opacity: 0;
+    transform: scaleX(0.6);
+  }
+}
+
+/* ===== CONTAINER ===== */
+
+.inner {
+  position: relative;
+  z-index: 2;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+
+  gap: 20px;
+}
+
+/* ===== LEFT ===== */
+
+.left {
+  display: flex;
+  align-items: center;
+}
+
+.logo {
+  height: 40px;
+}
+
+/* ===== RIGHT ===== */
+
+.right {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 10px;
+}
+
+/* ===== LINK (MENTIONS LÉGALES) ===== */
+
+.link {
+  background: none;
+  border: none;
+  padding: 0;
+
+  color: white;
+  font-family: "Courier New", monospace;
+  font-size: 12px;
+  letter-spacing: 1px;
+
+  cursor: pointer;
+  position: relative;
+
+  transition: opacity 0.3s ease;
+}
+
+.link:hover {
+  opacity: 0.8;
+}
+
+/* underline animé */
+
+.link::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -4px;
+  width: 0%;
+  height: 1px;
+  background-color: var(--color-gold);
+  transition: width 0.3s ease;
+}
+
+.link:hover::after {
+  width: 100%;
+}
+
+/* focus accessibilité */
+
+.link:focus-visible {
+  outline: 2px solid var(--color-gold);
+  outline-offset: 4px;
+}
+
+/* ===== COPYRIGHT ===== */
+
+.right p {
+  font-size: 12px;
+  opacity: 0.6;
+}
+
+/* ===== LIGNE BAS ===== */
+
+.bottomLine {
+  margin-top: 30px;
+  height: 1px;
+  width: 100%;
+  background-color: var(--color-gold);
+  opacity: 0.3;
+}
+
+/* ===== RESPONSIVE ===== */
+
+@media (min-width: 768px) {
+  .inner {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .right {
+    align-items: flex-end;
+  }
+}

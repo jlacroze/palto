@@ -1,0 +1,239 @@
+/* ===== SECTION ===== */
+
+.section {
+  position: relative;
+  background-color: white;
+  padding: 100px 20px;
+  perspective: 1000px;
+  overflow: hidden;
+}
+
+/* ===== LIGNES ===== */
+
+.lines {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+}
+
+.lines span {
+  position: absolute;
+  height: 1px;
+
+  background: linear-gradient(
+    to right,
+    transparent,
+    currentColor,
+    transparent
+  );
+
+  opacity: 0.15;
+
+  animation: lineFloat 6s ease-in-out infinite;
+}
+
+.lines span:nth-child(1) {
+  top: 30%;
+  left: 10%;
+  width: 60%;
+}
+
+.lines span:nth-child(2) {
+  top: 60%;
+  left: 30%;
+  width: 40%;
+  animation-delay: 2s;
+}
+
+/* ===== IMAGE ===== */
+
+.bgImage {
+  position: absolute;
+  top: 0;
+  right: 0;
+
+  width: 50%;
+  height: 100%;
+
+  background-size: cover;
+  background-position: center;
+
+  opacity: 0.35; /* 🔥 plus premium */
+  filter: grayscale(100%);
+
+  z-index: 0;
+}
+
+.bgImage::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+
+  background: linear-gradient(
+    to left,
+    rgba(255,255,255,0.4),
+    rgba(255,255,255,1)
+  );
+}
+
+/* ===== HEADER ===== */
+
+.header {
+  position: relative;
+  z-index: 2;
+
+  max-width: 800px;
+  margin: 0 auto 80px;
+  text-align: center;
+}
+
+.heading {
+  font-family: "Georgia", serif;
+  font-size: 32px;
+}
+
+.subtitle {
+  margin-top: 15px;
+  color: var(--color-silver);
+}
+
+/* ===== GRID ===== */
+
+.grid {
+  position: relative;
+  z-index: 2;
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 25px;
+  opacity: 0;
+  transform: translateY(50px);
+  transition: all 1s ease;
+}
+
+.show {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ===== CARD ===== */
+
+.card {
+  position: relative;
+  background-color: var(--color-cream);
+  padding: 2px;
+  transform-style: preserve-3d;
+  transition: transform 0.2s ease;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+  overflow: hidden;
+}
+
+/* lumière */
+
+.card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+
+  background: radial-gradient(
+    circle at var(--x, 50%) var(--y, 50%),
+    rgba(255,255,255,0.4),
+    transparent 40%
+  );
+
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.card:hover::before {
+  opacity: 1;
+}
+
+/* inner */
+
+.cardInner {
+  background-color: var(--color-cream);
+  padding: 30px;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  height: 100%;
+
+  transition: all 0.4s ease;
+}
+
+/* hover */
+
+.card:hover .cardInner {
+  background-color: white;
+  transform: translateZ(15px);
+}
+
+.card:hover {
+  box-shadow: 0 20px 60px rgba(0,0,0,0.08);
+}
+
+/* ligne gold */
+
+.card::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+
+  width: 0%;
+  height: 2px;
+  background-color: var(--color-gold);
+
+  transition: width 0.4s ease;
+}
+
+.card:hover::after {
+  width: 100%;
+}
+
+/* ===== TEXT ===== */
+
+.card h3 {
+  font-family: "Georgia", serif;
+  font-size: 20px;
+}
+
+.desc {
+  color: var(--color-silver);
+  line-height: 1.6;
+}
+
+/* ===== RESPONSIVE ===== */
+
+@media (max-width: 768px) {
+  .bgImage {
+    display: none;
+  }
+}
+
+@media (min-width: 768px) {
+  .heading {
+    font-size: 38px;
+  }
+
+  .grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 1024px) {
+  .heading {
+    font-size: 48px;
+  }
+
+  .grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+
+  .cardInner {
+    padding: 40px;
+  }
+}
