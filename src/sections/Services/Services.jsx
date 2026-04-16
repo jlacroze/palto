@@ -1,6 +1,6 @@
 import styles from "./Services.module.css";
 import useReveal from "../../hooks/useReveal";
-import bgImage from "../../assets/bg_hero.jpg";
+import bgImage from "../../assets/bg_hero.avif";
 
 const services = [
   {

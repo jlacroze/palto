@@ -1,6 +1,6 @@
 import styles from "./Contact.module.css";
 import useReveal from "../../hooks/useReveal";
-import contactImage from "../../assets/bg_hero.jpg";
+import contactImage from "../../assets/bg_hero.avif";
 
 export default function Contact() {
   const [ref, visible] = useReveal();

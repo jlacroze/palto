@@ -1,8 +1,8 @@
 import styles from "./Team.module.css";
 import useReveal from "../../hooks/useReveal";
 
-import member1 from "../../assets/bg_hero.jpg";
-import member2 from "../../assets/bg_hero.jpg";
+import member1 from "../../assets/bg_hero.avif";
+import member2 from "../../assets/bg_hero.avif";
 
 export default function Team() {
   const [ref, visible] = useReveal();

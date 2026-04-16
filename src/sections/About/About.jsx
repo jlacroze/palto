@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import styles from "./About.module.css";
 import useReveal from "../../hooks/useReveal";
-import image from "../../assets/bg_hero.jpg";
+import image from "../../assets/bg_hero.avif";
 
 export default function About() {
   const [ref, visible] = useReveal();
