@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import styles from "./About.module.css";
 import useReveal from "../../hooks/useReveal";
 import { usePage } from "../../hooks/usePage";
-import image from "../../assets/bg_hero.avif";
+import imageFallback from "../../assets/bg_hero.avif";
 
 export default function About() {
   const { sections } = usePage();
@@ -31,15 +31,26 @@ export default function About() {
       "PALTO accompagne les entreprises dans leurs décisions stratégiques en combinant expertise métier et vision long terme.",
     text2:
       "Nous structurons et pilotons vos projets avec exigence afin de garantir des résultats concrets et durables.",
+    cardLabel: "PALTO",
+    cardTitle: "Conseil Stratégique",
   };
 
   const aboutData = about || fallbackAbout;
 
-  // 🔥 IMAGE DYNAMIQUE
-  const imageUrl =
-    about?.image?.url
-      ? `${import.meta.env.VITE_API_URL}${about.image.url}`
-      : image;
+  // 🔥 HELPER MEDIA
+  const getMediaUrl = (media, fallback) => {
+    if (!media) return fallback;
+
+    if (media.formats?.medium?.url) return media.formats.medium.url;
+    if (media.formats?.small?.url) return media.formats.small.url;
+
+    if (media.url) return media.url;
+
+    return fallback;
+  };
+
+  // ✅ IMAGE
+  const imageUrl = getMediaUrl(about?.image, imageFallback);
 
   return (
     <section id="about" className={styles.section}>
@@ -99,10 +110,12 @@ export default function About() {
             visible ? styles.cardVisible : ""
           }`}
         >
-          <p className="label">PALTO</p>
+          <p className="label">
+            {aboutData.cardLabel}
+          </p>
 
           <h3 className={styles.big}>
-            Conseil<br />Stratégique
+            {aboutData.cardTitle}
           </h3>
         </div>
       </div>

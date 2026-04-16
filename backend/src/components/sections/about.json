@@ -1,0 +1,35 @@
+{
+  "collectionName": "components_sections_abouts",
+  "info": {
+    "displayName": "about"
+  },
+  "options": {},
+  "attributes": {
+    "title": {
+      "type": "string"
+    },
+    "text1": {
+      "type": "string"
+    },
+    "text2": {
+      "type": "string"
+    },
+    "image": {
+      "type": "media",
+      "multiple": false,
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ]
+    },
+    "cardLabel": {
+      "type": "string"
+    },
+    "cartTitle": {
+      "type": "string"
+    }
+  },
+  "config": {}
+}
