@@ -10,7 +10,7 @@ export default function Hero() {
     (section) => section.__component === "sections.hero"
   );
 
-  // 🔥 FALLBACK
+  // 🔥 FALLBACK DATA
   const fallbackHero = {
     title: "Excellence & stratégie",
     subtitle: "Votre partenaire digital",
@@ -18,17 +18,25 @@ export default function Hero() {
 
   const heroData = hero || fallbackHero;
 
-  // ✅ BACKGROUND (FIX STRAPI CLOUD)
-  const backgroundUrl =
-    hero?.background?.url
-      ? hero.background.url
-      : heroFallback;
+  // 🔥 HELPER IMAGE (gère tous les cas)
+  const getMediaUrl = (media, fallback) => {
+    if (!media) return fallback;
 
-  // ✅ LOGO (FIX STRAPI CLOUD)
-  const logoUrl =
-    hero?.logo?.url
-      ? hero.logo.url
-      : logoFallback;
+    // priorité aux formats optimisés
+    if (media.formats?.medium?.url) return media.formats.medium.url;
+    if (media.formats?.small?.url) return media.formats.small.url;
+
+    // fallback original
+    if (media.url) return media.url;
+
+    return fallback;
+  };
+
+  // ✅ BACKGROUND
+  const backgroundUrl = getMediaUrl(hero?.background, heroFallback);
+
+  // ✅ LOGO
+  const logoUrl = getMediaUrl(hero?.logo, logoFallback);
 
   return (
     <section id="home" className={styles.hero}>
@@ -38,6 +46,7 @@ export default function Hero() {
         src={backgroundUrl}
         alt="PALTO background"
         className={styles.bgImage}
+        loading="eager"
       />
 
       {/* LIGNES */}
@@ -52,13 +61,19 @@ export default function Hero() {
 
       {/* CONTENT */}
       <div className={styles.content}>
-        <img src={logoUrl} alt="PALTO" className={styles.logo} />
+        <img
+          src={logoUrl}
+          alt="PALTO"
+          className={styles.logo}
+        />
 
         <h1 className={styles.title}>
           {heroData.title}
         </h1>
 
-        <p>{heroData.subtitle}</p>
+        <p className={styles.subtitle}>
+          {heroData.subtitle}
+        </p>
       </div>
     </section>
   );
