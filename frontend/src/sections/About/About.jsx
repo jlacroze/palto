@@ -1,12 +1,15 @@
 import { useEffect, useState } from "react";
 import styles from "./About.module.css";
 import useReveal from "../../hooks/useReveal";
+import { usePage } from "../../hooks/usePage";
 import image from "../../assets/bg_hero.avif";
 
 export default function About() {
+  const { sections } = usePage();
   const [ref, visible] = useReveal();
   const [scrollY, setScrollY] = useState(0);
 
+  // 🔥 SCROLL EFFECT
   useEffect(() => {
     const handleScroll = () => {
       setScrollY(window.scrollY);
@@ -15,6 +18,28 @@ export default function About() {
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
+
+  // 🔥 GET DATA FROM STRAPI
+  const about = sections.find(
+    (section) => section.__component === "sections.about"
+  );
+
+  // 🔥 FALLBACK
+  const fallbackAbout = {
+    title: "Une vision durable et stratégique",
+    text1:
+      "PALTO accompagne les entreprises dans leurs décisions stratégiques en combinant expertise métier et vision long terme.",
+    text2:
+      "Nous structurons et pilotons vos projets avec exigence afin de garantir des résultats concrets et durables.",
+  };
+
+  const aboutData = about || fallbackAbout;
+
+  // 🔥 IMAGE DYNAMIQUE
+  const imageUrl =
+    about?.image?.url
+      ? `${import.meta.env.VITE_API_URL}${about.image.url}`
+      : image;
 
   return (
     <section id="about" className={styles.section}>
@@ -43,18 +68,16 @@ export default function About() {
         }`}
       >
         <h2 className={styles.heading}>
-          Une vision durable<br />et stratégique
+          {aboutData.title}
         </h2>
 
         <div className={styles.intro}>
           <p className={styles.textLine}>
-            PALTO accompagne les entreprises dans leurs décisions stratégiques
-            en combinant expertise métier et vision long terme.
+            {aboutData.text1}
           </p>
 
           <p className={styles.textLine}>
-            Nous structurons et pilotons vos projets avec exigence afin de
-            garantir des résultats concrets et durables.
+            {aboutData.text2}
           </p>
         </div>
       </div>
@@ -63,7 +86,7 @@ export default function About() {
       <div className={styles.visual}>
         <div className={styles.imageWrapper}>
           <img
-            src={image}
+            src={imageUrl}
             alt="PALTO expertise"
             className={`${styles.image} ${
               visible ? styles.imageVisible : ""

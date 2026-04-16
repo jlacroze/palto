@@ -1,31 +1,16 @@
-import { useEffect, useState } from "react";
 import styles from "./Hero.module.css";
 import heroImage from "../../assets/bg_hero.avif";
 import logo from "../../assets/logo_white.png";
-import { fetchPage } from "../../lib/api";
+import { usePage } from "../../hooks/usePage";
 
 export default function Hero() {
-  const [hero, setHero] = useState(null);
+  const { sections } = usePage();
 
-  useEffect(() => {
-    const loadData = async () => {
-      const res = await fetchPage();
+  const hero = sections.find(
+    (section) => section.__component === "sections.hero"
+  );
 
-      if (!res) return; // 🔥 évite crash en prod
-
-      const sections = res.data?.[0]?.sections || [];
-
-      const heroData = sections.find(
-        (section) => section.__component === "sections.hero"
-      );
-
-      setHero(heroData);
-    };
-
-    loadData();
-  }, []);
-
-  // 🔥 FALLBACK (PROD SAFE)
+  // 🔥 FALLBACK
   const fallbackHero = {
     title: "Excellence & stratégie",
     subtitle: "Votre partenaire digital",
@@ -33,10 +18,10 @@ export default function Hero() {
 
   const heroData = hero || fallbackHero;
 
-  // 🔥 IMAGE DYNAMIQUE + FALLBACK
+  // 🔥 IMAGE DYNAMIQUE (FIX PROD ⚠️)
   const imageUrl =
     hero?.image?.url
-      ? `http://localhost:1337${hero.image.url}`
+      ? `${import.meta.env.VITE_API_URL}${hero.image.url}`
       : heroImage;
 
   return (

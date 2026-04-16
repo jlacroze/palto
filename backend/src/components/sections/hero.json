@@ -11,7 +11,17 @@
     "subtitle": {
       "type": "string"
     },
-    "image": {
+    "background": {
+      "type": "media",
+      "multiple": false,
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ]
+    },
+    "logo": {
       "type": "media",
       "multiple": false,
       "allowedTypes": [
