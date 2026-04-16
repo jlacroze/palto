@@ -1,23 +1,38 @@
+import { useEffect, useState } from "react";
 import styles from "./About.module.css";
 import useReveal from "../../hooks/useReveal";
 import image from "../../assets/bg_hero.jpg";
 
 export default function About() {
   const [ref, visible] = useReveal();
+  const [scrollY, setScrollY] = useState(0);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setScrollY(window.scrollY);
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
   return (
     <section id="about" className={styles.section}>
       
-      {/* ===== LIGNES BACKGROUND ===== */}
+      {/* ===== LIGNES LUXE ===== */}
       <div className={styles.lines}>
-        <span className={`${styles.line} ${styles.l1}`} />
-        <span className={`${styles.line} ${styles.l2}`} />
-        <span className={`${styles.line} ${styles.l3}`} />
-        <span className={`${styles.line} ${styles.l4}`} />
-        <span className={`${styles.line} ${styles.l5}`} />
-        <span className={`${styles.line} ${styles.l6}`} />
-        <span className={`${styles.line} ${styles.l7}`} />
-        <span className={`${styles.line} ${styles.l8}`} />
+        <span
+          className={styles.line}
+          style={{ transform: `translateX(${scrollY * 0.03}px)` }}
+        />
+        <span
+          className={styles.line}
+          style={{ transform: `translateX(${scrollY * 0.05}px)` }}
+        />
+        <span
+          className={styles.line}
+          style={{ transform: `translateX(${scrollY * 0.02}px)` }}
+        />
       </div>
 
       {/* ===== TOP TEXT ===== */}
