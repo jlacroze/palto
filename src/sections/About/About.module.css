@@ -1,95 +1,212 @@
-.about {
-  position: relative;
-  overflow: hidden;
+/* ===== SECTION ===== */
+
+.section {
   background-color: var(--color-cream);
   padding: 60px 20px;
+}
+
+/* ===== TOP TEXT ===== */
+
+.topInner {
+  max-width: 1200px;
+  margin: 0 auto 60px;
+
   display: flex;
-  justify-content: center;
+  flex-direction: column;
+  gap: 25px;
+
+  opacity: 0;
+  transform: translateY(40px);
+  transition: all 1.2s ease;
 }
 
-.inner {
-  max-width: 800px;
-  text-align: center;
-  position: relative;
-  z-index: 2;
+.show {
+  opacity: 1;
+  transform: translateY(0);
 }
 
-.about h2 {
-  font-size: 28px;
-  margin: 20px 0;
+/* titre */
+.heading {
+  font-size: 26px;
+  font-family: "Georgia", serif;
 }
 
-.text {
+/* texte */
+.intro {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+
   color: var(--color-silver);
   line-height: 1.7;
-  margin-bottom: 20px;
 }
 
-/* ===== CERCLES ===== */
+/* ===== TEXT STAGGER ===== */
 
-.circle {
-  position: absolute;
-  border-radius: 50%;
-  border: 1px solid rgba(26, 58, 92, 0.15);
-  animation: rotateCircle linear infinite;
+.textLine {
+  opacity: 0;
+  transform: translateY(20px);
 }
 
-.circle::before {
+.show .textLine:nth-child(1) {
+  animation: fadeUp 0.8s ease forwards 0.4s;
+}
+
+.show .textLine:nth-child(2) {
+  animation: fadeUp 0.8s ease forwards 0.7s;
+}
+
+/* ===== KEYFRAME ===== */
+
+@keyframes fadeUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ===== VISUAL ===== */
+
+.visual {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* ===== IMAGE ===== */
+
+.imageWrapper {
+  width: 100%;
+  overflow: hidden;
+}
+
+.image {
+  width: 100%;
+  display: block;
+
+  transform: scale(1.15) translateY(60px);
+  opacity: 0;
+
+  transition: all 1.4s ease;
+}
+
+.imageVisible {
+  transform: scale(1) translateY(0);
+  opacity: 1;
+}
+
+/* hover */
+.imageWrapper:hover img {
+  transform: scale(1.05);
+}
+
+/* ===== CARD ===== */
+
+.card {
+  width: 100%;
+  background-color: var(--color-cobalt);
+  color: white;
+
+  padding: 30px;
+
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+
+  opacity: 0;
+  transform: translateX(80px);
+  transition: all 1.2s ease 0.3s;
+}
+
+.cardVisible {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+/* ===== TEXT ===== */
+
+.big {
+  font-size: 28px;
+  font-family: "Georgia", serif;
+}
+
+/* ===== LINK ===== */
+
+.link {
+  background: none;
+  border: none;
+  color: white;
+  text-align: left;
+  cursor: pointer;
+  position: relative;
+}
+
+.link::after {
   content: "";
   position: absolute;
-  inset: 0;
-  border-radius: 50%;
-  border-top: 2px solid var(--color-cobalt);
+  left: 0;
+  bottom: -4px;
+  width: 40px;
+  height: 1px;
+  background-color: var(--color-gold);
 }
 
-.circle1 {
-  width: 200px;
-  height: 200px;
-  top: 10%;
-  left: -80px;
-  animation-duration: 18s;
-}
-
-.circle2 {
-  width: 120px;
-  height: 120px;
-  bottom: 10%;
-  right: -40px;
-  animation-duration: 12s;
-}
-
-.circleCenter {
-  width: 160px;
-  height: 160px;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  opacity: 0.05;
-  animation-duration: 16s;
-}
-
-@keyframes rotateCircle {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
-}
-
-/* ===== DESKTOP ===== */
+/* ========================= */
+/* ===== TABLET ===== */
+/* ========================= */
 
 @media (min-width: 768px) {
-  .about {
-    padding: 100px 40px;
+  .section {
+    padding: 80px 40px;
   }
 
-  .about h2 {
-    font-size: 36px;
+  .heading {
+    font-size: 34px;
+  }
+
+  .big {
+    font-size: 34px;
   }
 }
-/* ===== POLISH TYPO ===== */
 
-.text {
-  font-size: 15px;
-  line-height: 1.8;
-  max-width: 600px;
-  margin-left: auto;
-  margin-right: auto;
+/* ========================= */
+/* ===== DESKTOP ===== */
+/* ========================= */
+
+@media (min-width: 1024px) {
+  .section {
+    padding: 100px 20px;
+  }
+
+  .heading {
+    font-size: 48px;
+  }
+
+  .visual {
+    position: relative;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .imageWrapper {
+    width: 75%;
+  }
+
+  .card {
+    position: absolute;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%) translateX(80px);
+
+    width: 45%;
+    padding: 60px;
+  }
+
+  .cardVisible {
+    transform: translateY(-50%) translateX(0);
+  }
+
+  .big {
+    font-size: 48px;
+  }
 }

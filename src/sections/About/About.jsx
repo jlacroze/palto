@@ -1,36 +1,67 @@
 import styles from "./About.module.css";
 import useReveal from "../../hooks/useReveal";
+import image from "../../assets/bg_hero.jpg";
 
 export default function About() {
   const [ref, visible] = useReveal();
 
   return (
-    <section id="about" className={styles.about}>
+    <section id="about" className={styles.section}>
       
-      {/* cercles */}
-      <div className={`${styles.circle} ${styles.circle1}`}></div>
-      <div className={`${styles.circle} ${styles.circle2}`}></div>
-      <div className={`${styles.circle} ${styles.circleCenter}`}></div>
-
+      {/* ===== TOP TEXT ===== */}
       <div
         ref={ref}
-        className={`${styles.inner} ${
-          visible ? "reveal-visible" : "reveal"
+        className={`${styles.topInner} ${
+          visible ? styles.show : ""
         }`}
       >
-        <p className="label">Qui sommes-nous</p>
-
-        <h2 className="section-title">
-          Une approche stratégique centrée sur l’excellence
+        <h2 className={styles.heading}>
+          Une vision durable<br />et stratégique
         </h2>
 
-        <p className={styles.text}>
-          PALTO accompagne les entreprises dans leurs décisions stratégiques.
-        </p>
+        <div className={styles.intro}>
+          <p className={styles.textLine}>
+            PALTO accompagne les entreprises dans leurs décisions stratégiques
+            en combinant expertise métier et vision long terme.
+          </p>
 
-        <p className={styles.text}>
-          Une exigence forte, une vision claire, des résultats mesurables.
-        </p>
+          <p className={styles.textLine}>
+            Nous structurons et pilotons vos projets avec exigence afin de
+            garantir des résultats concrets et durables.
+          </p>
+        </div>
+      </div>
+
+      {/* ===== VISUAL ===== */}
+      <div className={styles.visual}>
+        
+        {/* IMAGE */}
+        <div className={styles.imageWrapper}>
+          <img
+            src={image}
+            alt="PALTO expertise"
+            className={`${styles.image} ${
+              visible ? styles.imageVisible : ""
+            }`}
+          />
+        </div>
+
+        {/* CARD */}
+        <div
+          className={`${styles.card} ${
+            visible ? styles.cardVisible : ""
+          }`}
+        >
+          <p className="label">PALTO</p>
+
+          <h3 className={styles.big}>
+            Conseil<br />Stratégique
+          </h3>
+
+          <button className={styles.link}>
+            En savoir plus
+          </button>
+        </div>
       </div>
     </section>
   );
