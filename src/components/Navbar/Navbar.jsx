@@ -6,6 +6,9 @@ export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [active, setActive] = useState("home");
+  const [hideNav, setHideNav] = useState(false);
+
+  let lastScrollY = 0;
 
   const navLinks = [
     { label: "Accueil", id: "home" },
@@ -19,17 +22,30 @@ export default function Navbar() {
     document.body.style.overflow = isOpen ? "hidden" : "";
   }, [isOpen]);
 
-  // shadow scroll
+  // scroll behavior
   useEffect(() => {
     const handleScroll = () => {
-      setScrolled(window.scrollY > 10);
+      const currentScroll = window.scrollY;
+
+      setScrolled(currentScroll > 10);
+
+      // 👉 hide only desktop
+      if (window.innerWidth >= 768) {
+        if (currentScroll > lastScrollY && currentScroll > 100) {
+          setHideNav(true); // scroll down
+        } else {
+          setHideNav(false); // scroll up
+        }
+      }
+
+      lastScrollY = currentScroll;
     };
 
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  // active section (scroll spy FIXED)
+  // scroll spy
   useEffect(() => {
     const sections = document.querySelectorAll("section");
 
@@ -47,14 +63,19 @@ export default function Navbar() {
     );
 
     sections.forEach((section) => observer.observe(section));
-
     return () => observer.disconnect();
   }, []);
 
   const closeMenu = () => setIsOpen(false);
 
   return (
-    <nav className={`${styles.navbar} ${scrolled ? styles.scrolled : ""}`}>
+    <nav
+      className={`
+        ${styles.navbar}
+        ${scrolled ? styles.scrolled : ""}
+        ${hideNav ? styles.hide : ""}
+      `}
+    >
       <div className={styles.inner}>
         <a href="#home" onClick={closeMenu}>
           <img src={logo} alt="PALTO" className={styles.logo} />
@@ -86,20 +107,13 @@ export default function Navbar() {
 
       {/* Mobile menu */}
       <div className={`${styles.mobileMenu} ${isOpen ? styles.show : ""}`}>
-        
-        {/* cercles */}
-        <div className={`${styles.circle} ${styles.circle1}`}></div>
-        <div className={`${styles.circle} ${styles.circle2}`}></div>
-        <div className={`${styles.circle} ${styles.circle3}`}></div>
-
         <div className={styles.menuContent}>
-          {navLinks.map((link, index) => (
+          {navLinks.map((link) => (
             <a
               key={link.id}
               href={`#${link.id}`}
               onClick={closeMenu}
               className={active === link.id ? styles.active : ""}
-              style={{ animationDelay: `${index * 0.1}s` }}
             >
               {link.label}
             </a>
