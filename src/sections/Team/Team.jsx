@@ -4,19 +4,6 @@ import useReveal from "../../hooks/useReveal";
 import member1 from "../../assets/bg_hero.jpg";
 import member2 from "../../assets/bg_hero.jpg";
 
-const team = [
-  {
-    name: "Jean Dupont",
-    role: "Fondateur & Consultant",
-    image: member1,
-  },
-  {
-    name: "Marie Martin",
-    role: "Responsable Stratégie",
-    image: member2,
-  },
-];
-
 export default function Team() {
   const [ref, visible] = useReveal();
 
@@ -27,39 +14,50 @@ export default function Team() {
       <div className={styles.header}>
         <p className="label">Équipe</p>
         <h2 className={styles.heading}>
-          Les talents derrière<br />PALTO
+          L’expertise au cœur<br />du projet
         </h2>
       </div>
 
-      {/* BACKGROUND LINES */}
-      <div className={styles.lines}>
-        <span className={styles.line} />
-        <span className={styles.line} />
-        <span className={styles.line} />
-      </div>
-
-      {/* TEAM */}
+      {/* CONTENT */}
       <div
         ref={ref}
-        className={`${styles.grid} ${visible ? styles.show : ""}`}
+        className={`${styles.wrapper} ${
+          visible ? styles.show : ""
+        }`}
       >
-        {team.map((member, index) => (
-          <div
-            key={index}
-            className={styles.card}
-            style={{ transitionDelay: `${index * 0.2}s` }}
-          >
-            <div className={styles.imageWrapper}>
-              <img src={member.image} alt={member.name} />
-              <div className={styles.overlay} />
-            </div>
-
-            <div className={styles.content}>
-              <h3>{member.name}</h3>
-              <p>{member.role}</p>
-            </div>
+        {/* PERSONNE 1 */}
+        <div className={`${styles.person} ${styles.left}`}>
+          
+          <div className={styles.image}>
+            <img src={member1} alt="Jean Dupont" />
           </div>
-        ))}
+
+          <div className={styles.card}>
+            <h3>Jean Dupont</h3>
+            <span>Fondateur</span>
+            <p>
+              Expert en stratégie et pilotage de projets complexes,
+              il accompagne les entreprises dans leurs décisions clés.
+            </p>
+          </div>
+        </div>
+
+        {/* PERSONNE 2 */}
+        <div className={`${styles.person} ${styles.right}`}>
+          
+          <div className={styles.image}>
+            <img src={member2} alt="Marie Martin" />
+          </div>
+
+          <div className={styles.card}>
+            <h3>Marie Martin</h3>
+            <span>Responsable stratégie</span>
+            <p>
+              Spécialisée en transformation digitale et organisation,
+              elle structure et optimise les performances.
+            </p>
+          </div>
+        </div>
       </div>
     </section>
   );
