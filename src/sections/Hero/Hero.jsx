@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import styles from "./Hero.module.css";
 import useReveal from "../../hooks/useReveal";
-import heroImage from "../../assets/bg_hero.webp"; // ⚠️ vérifie le chemin
+import heroImage from "../../assets/bg_hero.jpg"; // ⚠️ vérifie le chemin
 import logo from "../../assets/logo_white.png";
 
 export default function Hero() {
