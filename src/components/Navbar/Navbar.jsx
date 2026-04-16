@@ -17,7 +17,7 @@ export default function Navbar() {
     { label: "Équipe", id: "team" },
   ];
 
-  // lock scroll menu
+  // lock scroll
   useEffect(() => {
     document.body.style.overflow = isOpen ? "hidden" : "";
   }, [isOpen]);
@@ -29,12 +29,11 @@ export default function Navbar() {
 
       setScrolled(currentScroll > 10);
 
-      // 👉 hide only desktop
       if (window.innerWidth >= 768) {
         if (currentScroll > lastScrollY && currentScroll > 100) {
-          setHideNav(true); // scroll down
+          setHideNav(true);
         } else {
-          setHideNav(false); // scroll up
+          setHideNav(false);
         }
       }
 
@@ -107,6 +106,14 @@ export default function Navbar() {
 
       {/* Mobile menu */}
       <div className={`${styles.mobileMenu} ${isOpen ? styles.show : ""}`}>
+        
+        {/* LIGNES BACKGROUND */}
+        <div className={styles.lines}>
+          <span className={styles.line} />
+          <span className={styles.line} />
+          <span className={styles.line} />
+        </div>
+
         <div className={styles.menuContent}>
           {navLinks.map((link) => (
             <a

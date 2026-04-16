@@ -81,10 +81,6 @@ export default function About() {
           <h3 className={styles.big}>
             Conseil<br />Stratégique
           </h3>
-
-          <button className={styles.link}>
-            En savoir plus
-          </button>
         </div>
       </div>
     </section>

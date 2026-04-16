@@ -81,10 +81,6 @@ export default function Services() {
               <p className={styles.desc}>
                 {service.desc}
               </p>
-
-              <span className={styles.link}>
-                Découvrir
-              </span>
             </div>
           </div>
         ))}
