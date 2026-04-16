@@ -5,10 +5,12 @@
   top: 0;
   width: 100%;
   background-color: var(--color-cream);
+
   display: flex;
   flex-direction: column;
   align-items: center;
-  z-index: 100;
+
+  z-index: 10000;
 
   transition: transform 0.4s ease, box-shadow 0.3s ease;
 }
@@ -44,7 +46,7 @@
   background: none;
   border: none;
   cursor: pointer;
-  z-index: 200;
+  z-index: 10001;
 }
 
 .burger span {
@@ -53,8 +55,6 @@
   background-color: var(--color-ink);
   transition: all 0.3s ease;
 }
-
-/* animation X */
 
 .open span:nth-child(1) {
   transform: rotate(45deg) translate(4px, 4px);
@@ -68,13 +68,13 @@
   transform: rotate(-45deg) translate(4px, -4px);
 }
 
-/* ===== DESKTOP LINKS ===== */
+/* ===== LINKS ===== */
 
 .links {
   display: none;
 }
 
-.links a {
+.link {
   color: var(--color-silver);
   text-decoration: none;
   font-family: "Courier New", monospace;
@@ -85,7 +85,7 @@
 
 /* underline */
 
-.links a::after {
+.link::after {
   content: "";
   position: absolute;
   left: 0;
@@ -96,8 +96,13 @@
   transition: width 0.3s ease;
 }
 
-.links a:hover::after,
-.links a.active::after {
+.link:hover::after {
+  width: 100%;
+}
+
+/* 🔥 ACTIVE */
+
+.linkActive::after {
   width: 100%;
 }
 
@@ -118,7 +123,7 @@
   transition: transform 0.5s ease, opacity 0.4s ease;
 
   overflow: hidden;
-  z-index: 150;
+  z-index: 9999;
 }
 
 .mobileMenu.show {
@@ -149,11 +154,6 @@
   animation: fadeInUp 0.5s ease forwards;
 }
 
-.menuContent a.active::after,
-.menuContent a:hover::after {
-  width: 100%;
-}
-
 .menuContent a::after {
   content: "";
   position: absolute;
@@ -165,6 +165,11 @@
   transition: width 0.3s ease;
 }
 
+.menuContent a:hover::after,
+.menuContent a.linkActive::after {
+  width: 100%;
+}
+
 /* ===== ANIMATION ===== */
 
 @keyframes fadeInUp {
@@ -174,7 +179,7 @@
   }
 }
 
-/* ===== LIGNES BACKGROUND ===== */
+/* ===== LIGNES ===== */
 
 .lines {
   position: absolute;
@@ -200,21 +205,18 @@
   top: 30%;
   width: 70%;
   left: 10%;
-  animation-delay: 0s;
 }
 
 .line:nth-child(2) {
   top: 55%;
   width: 50%;
   left: 20%;
-  animation-delay: 1.5s;
 }
 
 .line:nth-child(3) {
   top: 75%;
   width: 60%;
   left: 5%;
-  animation-delay: 3s;
 }
 
 @keyframes lineMove {

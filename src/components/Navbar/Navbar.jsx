@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import styles from "./Navbar.module.css";
 import logo from "../../assets/logo.png";
 
@@ -8,7 +8,7 @@ export default function Navbar() {
   const [active, setActive] = useState("home");
   const [hideNav, setHideNav] = useState(false);
 
-  let lastScrollY = 0;
+  const lastScrollY = useRef(0);
 
   const navLinks = [
     { label: "Accueil", id: "home" },
@@ -23,7 +23,7 @@ export default function Navbar() {
     document.body.style.overflow = isOpen ? "hidden" : "";
   }, [isOpen]);
 
-  // scroll behavior
+  // hide/show navbar on scroll
   useEffect(() => {
     const handleScroll = () => {
       const currentScroll = window.scrollY;
@@ -31,84 +31,96 @@ export default function Navbar() {
       setScrolled(currentScroll > 10);
 
       if (window.innerWidth >= 768) {
-        if (currentScroll > lastScrollY && currentScroll > 100) {
+        if (
+          currentScroll > lastScrollY.current &&
+          currentScroll > 100
+        ) {
           setHideNav(true);
         } else {
           setHideNav(false);
         }
       }
 
-      lastScrollY = currentScroll;
+      lastScrollY.current = currentScroll;
     };
 
-    window.addEventListener("scroll", handleScroll);
+    window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  // scroll spy
-  useEffect(() => {
+  // 🔥 SCROLL SPY VERSION UX (TOP OFFSET)
+useEffect(() => {
+  const handleScroll = () => {
     const sections = document.querySelectorAll("section");
 
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            setActive(entry.target.id);
-          }
-        });
-      },
-      {
-        rootMargin: "-40% 0px -40% 0px",
-      }
-    );
+    let closestSection = null;
+    let minDistance = Infinity;
 
-    sections.forEach((section) => observer.observe(section));
-    return () => observer.disconnect();
-  }, []);
+    sections.forEach((section) => {
+      const rect = section.getBoundingClientRect();
+      const distance = Math.abs(rect.top);
+
+      if (distance < minDistance) {
+        minDistance = distance;
+        closestSection = section.id;
+      }
+    });
+
+    if (closestSection) {
+      setActive(closestSection);
+    }
+  };
+
+  window.addEventListener("scroll", handleScroll);
+  return () => window.removeEventListener("scroll", handleScroll);
+}, []);
 
   const closeMenu = () => setIsOpen(false);
 
   return (
-    <nav
-      className={`
-        ${styles.navbar}
-        ${scrolled ? styles.scrolled : ""}
-        ${hideNav ? styles.hide : ""}
-      `}
-    >
-      <div className={styles.inner}>
-        <a href="#home" onClick={closeMenu}>
-          <img src={logo} alt="PALTO" className={styles.logo} />
-        </a>
+    <>
+      <nav
+        className={`
+          ${styles.navbar}
+          ${scrolled ? styles.scrolled : ""}
+          ${hideNav ? styles.hide : ""}
+        `}
+      >
+        <div className={styles.inner}>
+          <a href="#home" onClick={closeMenu}>
+            <img src={logo} alt="PALTO" className={styles.logo} />
+          </a>
 
-        {/* Desktop */}
-        <div className={styles.links}>
-          {navLinks.map((link) => (
-            <a
-              key={link.id}
-              href={`#${link.id}`}
-              className={active === link.id ? styles.active : ""}
-            >
-              {link.label}
-            </a>
-          ))}
+          {/* Desktop */}
+          <div className={styles.links}>
+            {navLinks.map((link) => (
+              <a
+                key={link.id}
+                href={`#${link.id}`}
+                className={`${styles.link} ${
+                  active === link.id ? styles.linkActive : ""
+                }`}
+              >
+                {link.label}
+              </a>
+            ))}
+          </div>
+
+          {/* Burger */}
+          <button
+            className={`${styles.burger} ${isOpen ? styles.open : ""}`}
+            onClick={() => setIsOpen(!isOpen)}
+            aria-label="Menu"
+          >
+            <span />
+            <span />
+            <span />
+          </button>
         </div>
-
-        {/* Burger */}
-        <button
-          className={`${styles.burger} ${isOpen ? styles.open : ""}`}
-          onClick={() => setIsOpen(!isOpen)}
-        >
-          <span />
-          <span />
-          <span />
-        </button>
-      </div>
+      </nav>
 
       {/* Mobile menu */}
       <div className={`${styles.mobileMenu} ${isOpen ? styles.show : ""}`}>
-        
-        {/* LIGNES BACKGROUND */}
         <div className={styles.lines}>
           <span className={styles.line} />
           <span className={styles.line} />
@@ -121,13 +133,15 @@ export default function Navbar() {
               key={link.id}
               href={`#${link.id}`}
               onClick={closeMenu}
-              className={active === link.id ? styles.active : ""}
+              className={`${styles.link} ${
+                active === link.id ? styles.linkActive : ""
+              }`}
             >
               {link.label}
             </a>
           ))}
         </div>
       </div>
-    </nav>
+    </>
   );
 }
