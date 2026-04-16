@@ -10,13 +10,14 @@ export default function About() {
       
       {/* ===== LIGNES BACKGROUND ===== */}
       <div className={styles.lines}>
-        {[...Array(8)].map((_, i) => (
-          <span
-            key={i}
-            className={styles.line}
-            style={{ animationDelay: `${i * 0.6}s` }}
-          />
-        ))}
+        <span className={`${styles.line} ${styles.l1}`} />
+        <span className={`${styles.line} ${styles.l2}`} />
+        <span className={`${styles.line} ${styles.l3}`} />
+        <span className={`${styles.line} ${styles.l4}`} />
+        <span className={`${styles.line} ${styles.l5}`} />
+        <span className={`${styles.line} ${styles.l6}`} />
+        <span className={`${styles.line} ${styles.l7}`} />
+        <span className={`${styles.line} ${styles.l8}`} />
       </div>
 
       {/* ===== TOP TEXT ===== */}

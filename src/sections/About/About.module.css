@@ -18,51 +18,50 @@
 
 .line {
   position: absolute;
-  left: 0;
-  width: 0%;
   height: 1px;
-
   background: linear-gradient(
     to right,
     transparent,
     var(--color-cobalt),
     transparent
   );
-
   opacity: 0.3;
-
-  animation: drawLine 4s ease-in-out infinite;
+  animation: drawLine 5s ease-in-out infinite;
 }
 
-/* position des lignes */
-.line:nth-child(1) { top: 10%; }
-.line:nth-child(2) { top: 20%; }
-.line:nth-child(3) { top: 30%; }
-.line:nth-child(4) { top: 45%; }
-.line:nth-child(5) { top: 55%; }
-.line:nth-child(6) { top: 65%; }
-.line:nth-child(7) { top: 75%; }
-.line:nth-child(8) { top: 85%; }
+/* ===== VARIATIONS ===== */
 
-/* animation */
+.l1 { top: 10%; width: 80%; left: 0; animation-delay: 0s; }
+.l2 { top: 18%; width: 50%; left: 20%; animation-delay: 0.5s; }
+.l3 { top: 30%; width: 90%; left: 0; animation-delay: 1s; }
+.l4 { top: 42%; width: 40%; left: 50%; animation-delay: 1.5s; }
+.l5 { top: 55%; width: 70%; left: 10%; animation-delay: 2s; }
+.l6 { top: 65%; width: 100%; left: 0; animation-delay: 2.5s; }
+.l7 { top: 78%; width: 60%; left: 30%; animation-delay: 3s; }
+.l8 { top: 88%; width: 45%; left: 0; animation-delay: 3.5s; }
+
+/* ===== ANIMATION ===== */
+
 @keyframes drawLine {
   0% {
-    width: 0%;
+    transform: scaleX(0);
     opacity: 0;
+    transform-origin: left;
   }
-  20% {
-    opacity: 0.5;
+  30% {
+    opacity: 0.6;
   }
   50% {
-    width: 100%;
+    transform: scaleX(1);
     opacity: 0.3;
   }
   80% {
-    opacity: 0.5;
+    opacity: 0.6;
   }
   100% {
-    width: 0%;
+    transform: scaleX(0);
     opacity: 0;
+    transform-origin: right;
   }
 }
 
@@ -79,7 +78,6 @@
 .topInner {
   max-width: 1200px;
   margin: 0 auto 60px;
-
   display: flex;
   flex-direction: column;
   gap: 25px;
@@ -103,7 +101,6 @@
   display: flex;
   flex-direction: column;
   gap: 18px;
-
   color: var(--color-silver);
   line-height: 1.7;
 }
