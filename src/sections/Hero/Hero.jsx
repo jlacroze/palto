@@ -1,24 +1,12 @@
-import { useEffect, useState } from "react";
 import styles from "./Hero.module.css";
-import useReveal from "../../hooks/useReveal";
-import heroImage from "../../assets/bg_hero.jpg"; // 🔥 compressée !
+import heroImage from "../../assets/bg_hero.jpg";
 import logo from "../../assets/logo_white.png";
 
 export default function Hero() {
-  const [loaded, setLoaded] = useState(false);
-  const [ref, visible] = useReveal();
-
-  useEffect(() => {
-    const timer = setTimeout(() => setLoaded(true), 200);
-    return () => clearTimeout(timer);
-  }, []);
-
   return (
-    <section
-      id="home"
-      className={`${styles.hero} ${loaded ? styles.loaded : ""}`}
-    >
-      {/* 🔥 IMAGE OPTIMISÉE LCP */}
+    <section id="home" className={styles.hero}>
+      
+      {/* IMAGE LCP */}
       <img
         src={heroImage}
         alt="PALTO background"
@@ -27,7 +15,7 @@ export default function Hero() {
         fetchpriority="high"
       />
 
-      {/* LIGNES ANIMÉES */}
+      {/* LIGNES */}
       <div className={styles.lines}>
         <span />
         <span />
@@ -38,12 +26,7 @@ export default function Hero() {
       <div className={styles.diagonal}></div>
 
       {/* CONTENT */}
-      <div
-        ref={ref}
-        className={`${styles.content} ${
-          visible ? styles.visible : ""
-        }`}
-      >
+      <div className={styles.content}>
         <img src={logo} alt="PALTO" className={styles.logo} />
 
         <h1 className={styles.title}>
