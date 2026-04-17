@@ -486,7 +486,12 @@ export interface ApiPagePage extends Struct.CollectionTypeSchema {
       Schema.Attribute.Private;
     publishedAt: Schema.Attribute.DateTime;
     sections: Schema.Attribute.DynamicZone<
-      ['sections.hero', 'sections.about', 'sections.services']
+      [
+        'sections.hero',
+        'sections.about',
+        'sections.services',
+        'shared.team-member',
+      ]
     >;
     slug: Schema.Attribute.UID<'title'>;
     title: Schema.Attribute.String;

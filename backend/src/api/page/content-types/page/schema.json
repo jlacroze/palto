@@ -23,7 +23,8 @@
       "components": [
         "sections.hero",
         "sections.about",
-        "sections.services"
+        "sections.services",
+        "shared.team-member"
       ]
     }
   }
