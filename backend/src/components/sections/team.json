@@ -1,0 +1,21 @@
+{
+  "collectionName": "components_sections_teams",
+  "info": {
+    "displayName": "team"
+  },
+  "options": {},
+  "attributes": {
+    "label": {
+      "type": "string"
+    },
+    "title": {
+      "type": "string"
+    },
+    "items": {
+      "type": "component",
+      "component": "shared.team-member",
+      "repeatable": true
+    }
+  },
+  "config": {}
+}

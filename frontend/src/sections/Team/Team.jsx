@@ -1,11 +1,53 @@
 import styles from "./Team.module.css";
 import useReveal from "../../hooks/useReveal";
+import { usePage } from "../../hooks/usePage";
 
-import member1 from "../../assets/bg_hero.avif";
-import member2 from "../../assets/bg_hero.avif";
+import fallbackImg from "../../assets/bg_hero.avif";
 
 export default function Team() {
+  const { sections } = usePage();
   const [ref, visible] = useReveal();
+
+  // 🔥 Récupération section
+  const team = sections.find(
+    (section) => section.__component === "sections.team"
+  );
+
+  // 🔥 FALLBACK COMPLET
+  const fallback = {
+    label: "Équipe",
+    title: "L’expertise au cœur du projet",
+    items: [
+      {
+        id: 1,
+        name: "Jean Dupont",
+        role: "Fondateur",
+        description:
+          "Expert en stratégie et pilotage de projets complexes, il accompagne les entreprises dans leurs décisions clés.",
+      },
+      {
+        id: 2,
+        name: "Marie Martin",
+        role: "Responsable stratégie",
+        description:
+          "Spécialisée en transformation digitale et organisation, elle structure et optimise les performances.",
+      },
+    ],
+  };
+
+  const data =
+    team && team.items?.length > 0 ? team : fallback;
+
+  // 🔥 Helper image (Strapi Cloud OK)
+  const getMediaUrl = (media) => {
+    if (!media) return fallbackImg;
+
+    // Strapi Cloud → URL déjà complète
+    if (media.url?.startsWith("http")) return media.url;
+
+    // fallback local
+    return `${import.meta.env.VITE_API_URL}${media.url}`;
+  };
 
   return (
     <section id="team" className={styles.section}>
@@ -18,9 +60,10 @@ export default function Team() {
 
       {/* HEADER */}
       <div className={styles.header}>
-        <p className="label">Équipe</p>
+        <p className="label">{data.label}</p>
+
         <h2 className={styles.heading}>
-          L’expertise au cœur<br />du projet
+          {data.title}
         </h2>
       </div>
 
@@ -31,39 +74,32 @@ export default function Team() {
           visible ? styles.show : ""
         }`}
       >
-        {/* PERSONNE 1 */}
-        <div className={`${styles.person} ${styles.left}`}>
-          
-          <div className={styles.image}>
-            <img src={member1} alt="Jean Dupont" />
-          </div>
+        {data.items.map((member, index) => (
+          <div
+            key={member.id || index}
+            className={`${styles.person} ${
+              index % 2 === 0 ? styles.left : styles.right
+            }`}
+          >
+            {/* IMAGE */}
+            <div className={styles.image}>
+              <img
+                src={getMediaUrl(member.photo)}
+                alt={member.name}
+              />
+            </div>
 
-          <div className={styles.card}>
-            <h3>Jean Dupont</h3>
-            <span>Fondateur</span>
-            <p>
-              Expert en stratégie et pilotage de projets complexes,
-              il accompagne les entreprises dans leurs décisions clés.
-            </p>
-          </div>
-        </div>
+            {/* CARD */}
+            <div className={styles.card}>
+              <h3>{member.name}</h3>
+              <span>{member.role}</span>
 
-        {/* PERSONNE 2 */}
-        <div className={`${styles.person} ${styles.right}`}>
-          
-          <div className={styles.image}>
-            <img src={member2} alt="Marie Martin" />
+              <p>
+                {member.description || member.desc}
+              </p>
+            </div>
           </div>
-
-          <div className={styles.card}>
-            <h3>Marie Martin</h3>
-            <span>Responsable stratégie</span>
-            <p>
-              Spécialisée en transformation digitale et organisation,
-              elle structure et optimise les performances.
-            </p>
-          </div>
-        </div>
+        ))}
       </div>
     </section>
   );

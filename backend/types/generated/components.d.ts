@@ -46,6 +46,18 @@ export interface SectionsServices extends Struct.ComponentSchema {
   };
 }
 
+export interface SectionsTeam extends Struct.ComponentSchema {
+  collectionName: 'components_sections_teams';
+  info: {
+    displayName: 'team';
+  };
+  attributes: {
+    items: Schema.Attribute.Component<'shared.team-member', true>;
+    label: Schema.Attribute.String;
+    title: Schema.Attribute.String;
+  };
+}
+
 export interface SharedServiceItem extends Struct.ComponentSchema {
   collectionName: 'components_shared_service_items';
   info: {
@@ -57,13 +69,28 @@ export interface SharedServiceItem extends Struct.ComponentSchema {
   };
 }
 
+export interface SharedTeamMember extends Struct.ComponentSchema {
+  collectionName: 'components_shared_team_members';
+  info: {
+    displayName: 'team-member';
+  };
+  attributes: {
+    desc: Schema.Attribute.String;
+    name: Schema.Attribute.String;
+    photo: Schema.Attribute.Media<'images' | 'files' | 'videos' | 'audios'>;
+    role: Schema.Attribute.String;
+  };
+}
+
 declare module '@strapi/strapi' {
   export module Public {
     export interface ComponentSchemas {
       'sections.about': SectionsAbout;
       'sections.hero': SectionsHero;
       'sections.services': SectionsServices;
+      'sections.team': SectionsTeam;
       'shared.service-item': SharedServiceItem;
+      'shared.team-member': SharedTeamMember;
     }
   }
 }
