@@ -6,11 +6,27 @@ export const usePage = () => {
 
   useEffect(() => {
     const loadData = async () => {
-      const res = await fetchPage();
+      try {
+        // ✅ 1. check cache
+        const cached = sessionStorage.getItem("page-data");
 
-      if (!res) return;
+        if (cached) {
+          setSections(JSON.parse(cached));
+          return;
+        }
 
-      setSections(res.data?.[0]?.sections || []);
+        // ✅ 2. fetch API
+        const res = await fetchPage();
+
+        const data = res?.data?.[0]?.sections || [];
+
+        // ✅ 3. save cache
+        sessionStorage.setItem("page-data", JSON.stringify(data));
+
+        setSections(data);
+      } catch (e) {
+        console.error("Error fetching page:", e);
+      }
     };
 
     loadData();
