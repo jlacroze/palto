@@ -1,6 +1,6 @@
 import styles from "./Hero.module.css";
 import heroFallback from "../../assets/bg_hero.avif";
-import logoFallback from "../../assets/logo_white.png";
+import logoFallback from "../../assets/logo_white.avif";
 import { usePage } from "../../hooks/usePage";
 
 export default function Hero() {

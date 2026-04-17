@@ -1,5 +1,5 @@
 import styles from "./Footer.module.css";
-import logo from "../../assets/logo_white.png";
+import logo from "../../assets/logo_white.avif";
 
 export default function Footer({ onOpenLegal }) {
   return (
