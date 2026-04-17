@@ -12,14 +12,38 @@ export default function Services() {
   );
 
   // 🔥 FALLBACK
-  const fallback = {
-    label: "Expertises",
-    title: "Des solutions pensées pour durer",
-    subtitle: "Une approche structurée pour accompagner votre croissance",
-    items: [],
-  };
+ const fallback = {
+  label: "Expertises",
+  title: "Des solutions pensées pour durer",
+  subtitle: "Une approche structurée pour accompagner votre croissance",
+  items: [
+    {
+      id: 1,
+      title: "Conseil stratégique",
+      desc: "Accompagnement dans vos prises de décision et structuration de votre vision.",
+    },
+    {
+      id: 2,
+      title: "Transformation digitale",
+      desc: "Optimisation de vos outils et process pour une performance durable.",
+    },
+    {
+      id: 3,
+      title: "Pilotage de projet",
+      desc: "Gestion rigoureuse et suivi de vos projets à fort enjeu.",
+    },
+    {
+      id: 4,
+      title: "Audit & analyse",
+      desc: "Diagnostic précis pour identifier vos leviers de croissance.",
+    },
+  ],
+};
 
-  const data = servicesSection || fallback;
+  const data =
+  servicesSection && servicesSection.items?.length > 0
+    ? servicesSection
+    : fallback;
 
   // 🔥 HELPER IMAGE
   const getMediaUrl = (media, fallback) => {
