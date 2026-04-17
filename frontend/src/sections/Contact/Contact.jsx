@@ -1,6 +1,7 @@
 import styles from "./Contact.module.css";
 import useReveal from "../../hooks/useReveal";
 import { usePage } from "../../hooks/usePage";
+import emailjs from "@emailjs/browser";
 
 import contactFallback from "../../assets/bg_hero.avif";
 
@@ -8,7 +9,7 @@ export default function Contact() {
   const { sections } = usePage();
   const [ref, visible] = useReveal();
 
-  // 🔥 Récup section
+  // 🔥 Récup section Strapi
   const contact = sections.find(
     (section) => section.__component === "sections.contact"
   );
@@ -21,13 +22,34 @@ export default function Contact() {
 
   const data = contact || fallback;
 
-  // 🔥 IMAGE
+  // 🔥 IMAGE (compatible Strapi Cloud)
   const imageUrl =
     contact?.image?.url?.startsWith("http")
       ? contact.image.url
       : contact?.image?.url
       ? `${import.meta.env.VITE_API_URL}${contact.image.url}`
       : contactFallback;
+
+  // 🔥 SUBMIT EMAILJS
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    emailjs
+      .sendForm(
+        "service_phq75fh",   // 🔁 remplace si besoin
+        "template_71tplbn",    // 🔁 TON TEMPLATE ID
+        e.target,
+        "LLgwv59YM11xmDVn7"         // 🔁 TA PUBLIC KEY
+      )
+      .then(() => {
+        alert("✅ Message envoyé !");
+        e.target.reset();
+      })
+      .catch((error) => {
+        console.error(error);
+        alert("❌ Erreur lors de l'envoi");
+      });
+  };
 
   return (
     <section id="contact" className={styles.section}>
@@ -57,18 +79,8 @@ export default function Contact() {
             <span>{data.subtitle}</span>
           </div>
 
-          <form
-            action="https://formspree.io/f/xnjlpeed"
-            method="POST"
-            className={styles.form}
-          >
-            {/* SUBJECT */}
-            <input
-              type="hidden"
-              name="_subject"
-              value="Nouveau message depuis PALTO"
-            />
-
+          <form onSubmit={handleSubmit} className={styles.form}>
+            
             <div className={styles.row}>
               <div className={styles.field}>
                 <label>PRÉNOM</label>
