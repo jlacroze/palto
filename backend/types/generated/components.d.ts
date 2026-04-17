@@ -7,7 +7,7 @@ export interface SectionsAbout extends Struct.ComponentSchema {
   };
   attributes: {
     cardLabel: Schema.Attribute.String;
-    cartTitle: Schema.Attribute.String;
+    cardTitle: Schema.Attribute.String;
     image: Schema.Attribute.Media<'images' | 'files' | 'videos' | 'audios'>;
     text1: Schema.Attribute.String;
     text2: Schema.Attribute.String;

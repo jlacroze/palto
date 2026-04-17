@@ -27,7 +27,7 @@
     "cardLabel": {
       "type": "string"
     },
-    "cartTitle": {
+    "cardTitle": {
       "type": "string"
     }
   },
