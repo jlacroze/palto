@@ -24,7 +24,8 @@
         "sections.hero",
         "sections.about",
         "sections.services",
-        "sections.team"
+        "sections.team",
+        "sections.contact"
       ]
     }
   }

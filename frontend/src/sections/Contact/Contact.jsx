@@ -1,10 +1,35 @@
 import styles from "./Contact.module.css";
 import useReveal from "../../hooks/useReveal";
-import contactImage from "../../assets/bg_hero.avif";
+import { usePage } from "../../hooks/usePage";
+
+import contactFallback from "../../assets/bg_hero.avif";
 
 export default function Contact() {
+  const { sections } = usePage();
   const [ref, visible] = useReveal();
 
+  // 🔥 Récup section
+  const contact = sections.find(
+    (section) => section.__component === "sections.contact"
+  );
+
+  // 🔥 FALLBACK
+  const fallback = {
+    title: "Nous contacter",
+    subtitle: "GET IN TOUCH",
+  };
+
+  const data = contact || fallback;
+
+  // 🔥 IMAGE
+  const imageUrl =
+    contact?.image?.url?.startsWith("http")
+      ? contact.image.url
+      : contact?.image?.url
+      ? `${import.meta.env.VITE_API_URL}${contact.image.url}`
+      : contactFallback;
+
+  // 🔥 FORM SUBMIT (temp)
   const handleSubmit = (e) => {
     e.preventDefault();
 
@@ -40,14 +65,14 @@ Message: ${formData.get("message")}
       >
         {/* IMAGE */}
         <div className={styles.image}>
-          <img src={contactImage} alt="Contact" />
+          <img src={imageUrl} alt="Contact" />
         </div>
 
         {/* FORM */}
         <div className={styles.formContainer}>
           <div className={styles.header}>
-            <h2>Nous contacter</h2>
-            <span>GET IN TOUCH</span>
+            <h2>{data.title}</h2>
+            <span>{data.subtitle}</span>
           </div>
 
           <form onSubmit={handleSubmit} className={styles.form}>
