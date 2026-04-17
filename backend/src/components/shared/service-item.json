@@ -1,0 +1,16 @@
+{
+  "collectionName": "components_shared_service_items",
+  "info": {
+    "displayName": "service-item"
+  },
+  "options": {},
+  "attributes": {
+    "title": {
+      "type": "string"
+    },
+    "desc": {
+      "type": "string"
+    }
+  },
+  "config": {}
+}

@@ -30,11 +30,40 @@ export interface SectionsHero extends Struct.ComponentSchema {
   };
 }
 
+export interface SectionsServices extends Struct.ComponentSchema {
+  collectionName: 'components_sections_services';
+  info: {
+    displayName: 'services';
+  };
+  attributes: {
+    background: Schema.Attribute.Media<
+      'images' | 'files' | 'videos' | 'audios'
+    >;
+    items: Schema.Attribute.Component<'shared.service-item', true>;
+    label: Schema.Attribute.String;
+    subtitle: Schema.Attribute.String;
+    title: Schema.Attribute.String;
+  };
+}
+
+export interface SharedServiceItem extends Struct.ComponentSchema {
+  collectionName: 'components_shared_service_items';
+  info: {
+    displayName: 'service-item';
+  };
+  attributes: {
+    desc: Schema.Attribute.String;
+    title: Schema.Attribute.String;
+  };
+}
+
 declare module '@strapi/strapi' {
   export module Public {
     export interface ComponentSchemas {
       'sections.about': SectionsAbout;
       'sections.hero': SectionsHero;
+      'sections.services': SectionsServices;
+      'shared.service-item': SharedServiceItem;
     }
   }
 }
