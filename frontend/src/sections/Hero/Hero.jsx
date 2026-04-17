@@ -1,4 +1,3 @@
-import { useEffect, useState } from "react";
 import styles from "./Hero.module.css";
 import heroFallback from "../../assets/bg_hero.avif";
 import logoFallback from "../../assets/logo_white.png";
@@ -19,7 +18,7 @@ export default function Hero() {
 
   const heroData = hero || fallbackHero;
 
-  // 🔥 HELPER IMAGE (safe)
+  // 🔥 HELPER IMAGE
   const getMediaUrl = (media, fallback) => {
     if (!media) return fallback;
 
@@ -31,20 +30,8 @@ export default function Hero() {
     return fallback;
   };
 
-  // ✅ BACKGROUND (LCP OPTIMISÉ)
-  const [bgSrc, setBgSrc] = useState(heroFallback);
-
-  useEffect(() => {
-    if (hero && hero.background) {
-      const url = getMediaUrl(hero.background, heroFallback);
-
-      if (url) {
-        setBgSrc(url);
-      }
-    }
-  }, [hero]);
-
-  // ✅ LOGO (safe)
+  // ✅ IMAGE UNIQUE (pas de double render)
+  const backgroundUrl = getMediaUrl(hero?.background, heroFallback);
   const logoUrl = getMediaUrl(hero?.logo, logoFallback);
 
   return (
@@ -52,11 +39,12 @@ export default function Hero() {
       
       {/* BACKGROUND */}
       <img
-        src={bgSrc || heroFallback}
+        src={backgroundUrl}
         alt="PALTO background"
         className={styles.bgImage}
         loading="eager"
         fetchpriority="high"
+        decoding="async"
       />
 
       {/* LIGNES */}
@@ -77,6 +65,7 @@ export default function Hero() {
           className={styles.logo}
           loading="eager"
           fetchpriority="high"
+          decoding="async"
         />
 
         <h1 className={styles.title}>

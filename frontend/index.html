@@ -3,10 +3,10 @@
   <head>
     <meta charset="UTF-8" />
 
-    <!-- 🔥 TITLE -->
+    <!-- TITLE -->
     <title>Palto - Agence de stratégie digitale & performance</title>
 
-    <!-- 🔥 DESCRIPTION -->
+    <!-- DESCRIPTION -->
     <meta
       name="description"
       content="Palto accompagne les entreprises dans leur stratégie digitale, leur croissance et leur performance avec une approche sur-mesure."
@@ -17,7 +17,8 @@
 
     <!-- SEO -->
     <meta name="robots" content="index, follow" />
-    <!-- 🔥 OPEN GRAPH -->
+
+    <!-- OPEN GRAPH -->
     <meta property="og:title" content="Palto - Stratégie & Excellence" />
     <meta
       property="og:description"
@@ -27,7 +28,7 @@
     <meta property="og:url" content="https://palto-ten.vercel.app/" />
     <meta property="og:image" content="/preview.jpg" />
 
-    <!-- 🔥 TWITTER -->
+    <!-- TWITTER -->
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content="Palto - Stratégie & Excellence" />
     <meta
@@ -36,17 +37,16 @@
     />
     <meta name="twitter:image" content="/preview.jpg" />
 
-    <!-- 🔥 LCP BOOST (CRITIQUE) -->
-    <!-- ⚠️ mets le BON format (webp ou avif) -->
-    <link rel="preload" as="image" href="/bg_hero.avif" fetchpriority="high" />
+    <!-- ⚠️ IMPORTANT -->
+    <!-- On enlève le preload car image dynamique (Strapi) -->
 
-    <!-- 🔥 DNS PREFETCH (optionnel mais propre) -->
+    <!-- DNS PREFETCH -->
     <link rel="dns-prefetch" href="//fonts.googleapis.com" />
 
     <!-- favicon -->
     <link rel="icon" href="/favicon.svg" />
 
-    <!-- 🔥 CRITICAL CSS (mini reset rapide) -->
+    <!-- CRITICAL CSS -->
     <style>
       html, body {
         margin: 0;
@@ -57,6 +57,7 @@
 
   <body>
     <div id="root">
+      <!-- Petit skeleton (OK pour perf perçue) -->
       <section style="
         height:100vh;
         display:flex;
@@ -66,11 +67,11 @@
         color:white;
         font-family:sans-serif;
       ">
-      <h1>PALTO</h1>
+        <h1>PALTO</h1>
       </section>
     </div>
 
-    <!-- 🔥 JS -->
+    <!-- JS -->
     <script type="module" src="/src/main.jsx"></script>
   </body>
 </html>
