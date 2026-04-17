@@ -29,24 +29,6 @@ export default function Contact() {
       ? `${import.meta.env.VITE_API_URL}${contact.image.url}`
       : contactFallback;
 
-  // 🔥 FORM SUBMIT (temp)
-  const handleSubmit = (e) => {
-    e.preventDefault();
-
-    const formData = new FormData(e.target);
-
-    const mailto = `mailto:tonemail@gmail.com?subject=Contact PALTO&body=
-Prénom: ${formData.get("firstname")}
-Nom: ${formData.get("lastname")}
-Société: ${formData.get("company")}
-Téléphone: ${formData.get("phone")}
-Email: ${formData.get("email")}
-Message: ${formData.get("message")}
-    `;
-
-    window.location.href = mailto;
-  };
-
   return (
     <section id="contact" className={styles.section}>
       
@@ -75,8 +57,18 @@ Message: ${formData.get("message")}
             <span>{data.subtitle}</span>
           </div>
 
-          <form onSubmit={handleSubmit} className={styles.form}>
-            
+          <form
+            action="https://formspree.io/f/xnjlpeed"
+            method="POST"
+            className={styles.form}
+          >
+            {/* SUBJECT */}
+            <input
+              type="hidden"
+              name="_subject"
+              value="Nouveau message depuis PALTO"
+            />
+
             <div className={styles.row}>
               <div className={styles.field}>
                 <label>PRÉNOM</label>
