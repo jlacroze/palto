@@ -2,6 +2,7 @@ import styles from "./Contact.module.css";
 import useReveal from "../../hooks/useReveal";
 import { usePage } from "../../hooks/usePage";
 import emailjs from "@emailjs/browser";
+import { useId } from "react";
 
 import contactFallback from "../../assets/bg_hero.avif";
 
@@ -9,12 +10,10 @@ export default function Contact() {
   const { sections } = usePage();
   const [ref, visible] = useReveal();
 
-  // 🔥 Récup section Strapi
   const contact = sections.find(
     (section) => section.__component === "sections.contact"
   );
 
-  // 🔥 FALLBACK
   const fallback = {
     title: "Nous contacter",
     subtitle: "GET IN TOUCH",
@@ -22,7 +21,6 @@ export default function Contact() {
 
   const data = contact || fallback;
 
-  // 🔥 IMAGE (compatible Strapi Cloud)
   const imageUrl =
     contact?.image?.url?.startsWith("http")
       ? contact.image.url
@@ -30,16 +28,18 @@ export default function Contact() {
       ? `${import.meta.env.VITE_API_URL}${contact.image.url}`
       : contactFallback;
 
-  // 🔥 SUBMIT EMAILJS
+  // 🔥 IDs uniques pour accessibilité
+  const id = useId();
+
   const handleSubmit = (e) => {
     e.preventDefault();
 
     emailjs
       .sendForm(
-        "service_phq75fh",   // 🔁 remplace si besoin
-        "template_71tplbn",    // 🔁 TON TEMPLATE ID
+        "service_phq75fh",
+        "template_71tplbn",
         e.target,
-        "LLgwv59YM11xmDVn7"         // 🔁 TA PUBLIC KEY
+        "LLgwv59YM11xmDVn7"
       )
       .then(() => {
         alert("✅ Message envoyé !");
@@ -54,7 +54,6 @@ export default function Contact() {
   return (
     <section id="contact" className={styles.section}>
       
-      {/* LIGNES */}
       <div className={styles.lines}>
         <span />
         <span />
@@ -63,13 +62,11 @@ export default function Contact() {
 
       <div
         ref={ref}
-        className={`${styles.wrapper} ${
-          visible ? styles.show : ""
-        }`}
+        className={`${styles.wrapper} ${visible ? styles.show : ""}`}
       >
         {/* IMAGE */}
         <div className={styles.image}>
-          <img src={imageUrl} alt="Contact" />
+          <img src={imageUrl} alt="" /> {/* décoratif */}
         </div>
 
         {/* FORM */}
@@ -79,49 +76,84 @@ export default function Contact() {
             <span>{data.subtitle}</span>
           </div>
 
-          <form onSubmit={handleSubmit} className={styles.form}>
+          <form
+            onSubmit={handleSubmit}
+            className={styles.form}
+            aria-labelledby="contact-title"
+          >
             
             <div className={styles.row}>
               <div className={styles.field}>
-                <label>PRÉNOM</label>
-                <input name="firstname" placeholder="Jean" required />
+                <label htmlFor={`${id}-firstname`}>Prénom</label>
+                <input
+                  id={`${id}-firstname`}
+                  name="firstname"
+                  placeholder="Jean"
+                  required
+                  autoComplete="given-name"
+                />
               </div>
 
               <div className={styles.field}>
-                <label>NOM</label>
-                <input name="lastname" placeholder="Dupont" required />
+                <label htmlFor={`${id}-lastname`}>Nom</label>
+                <input
+                  id={`${id}-lastname`}
+                  name="lastname"
+                  placeholder="Dupont"
+                  required
+                  autoComplete="family-name"
+                />
               </div>
             </div>
 
             <div className={styles.row}>
               <div className={styles.field}>
-                <label>SOCIÉTÉ</label>
-                <input name="company" placeholder="Acme SAS" />
+                <label htmlFor={`${id}-company`}>Société</label>
+                <input
+                  id={`${id}-company`}
+                  name="company"
+                  placeholder="Acme SAS"
+                  autoComplete="organization"
+                />
               </div>
 
               <div className={styles.field}>
-                <label>TÉLÉPHONE</label>
-                <input name="phone" placeholder="+33 6 00 00 00 00" />
+                <label htmlFor={`${id}-phone`}>Téléphone</label>
+                <input
+                  id={`${id}-phone`}
+                  name="phone"
+                  placeholder="+33 6 00 00 00 00"
+                  autoComplete="tel"
+                />
               </div>
             </div>
 
             <div className={styles.field}>
-              <label>EMAIL *</label>
-              <input type="email" name="email" required />
+              <label htmlFor={`${id}-email`}>Email *</label>
+              <input
+                id={`${id}-email`}
+                type="email"
+                name="email"
+                required
+                autoComplete="email"
+                aria-required="true"
+              />
             </div>
 
             <div className={styles.field}>
-              <label>MESSAGE *</label>
+              <label htmlFor={`${id}-message`}>Message *</label>
               <textarea
+                id={`${id}-message`}
                 name="message"
                 rows="5"
                 required
                 placeholder="Décrivez votre besoin..."
+                aria-required="true"
               />
             </div>
 
             <button type="submit" className={styles.button}>
-              ENVOYER LE MESSAGE
+              Envoyer le message
             </button>
           </form>
         </div>
