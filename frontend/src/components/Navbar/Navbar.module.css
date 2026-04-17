@@ -75,7 +75,7 @@
 }
 
 .link {
-  color: var(--color-silver);
+  color: rgba(0, 0, 0, 0.75);
   text-decoration: none;
   font-family: "Courier New", monospace;
   font-size: 16px;
