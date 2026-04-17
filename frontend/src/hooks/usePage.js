@@ -1,27 +1,39 @@
 import { useEffect, useState } from "react";
 import { fetchPage } from "../lib/api";
 
+const CACHE_KEY = "page-data";
+const CACHE_DURATION = 5 * 60 * 1000; // 5 minutes
+
 export const usePage = () => {
   const [sections, setSections] = useState([]);
 
   useEffect(() => {
     const loadData = async () => {
       try {
-        // ✅ 1. check cache
-        const cached = sessionStorage.getItem("page-data");
+        const cached = sessionStorage.getItem(CACHE_KEY);
 
         if (cached) {
-          setSections(JSON.parse(cached));
-          return;
+          const { data, timestamp } = JSON.parse(cached);
+
+          // ✅ si cache encore valide
+          if (Date.now() - timestamp < CACHE_DURATION) {
+            setSections(data);
+            return;
+          }
         }
 
-        // ✅ 2. fetch API
+        // 🔄 fetch fresh data
         const res = await fetchPage();
-
         const data = res?.data?.[0]?.sections || [];
 
-        // ✅ 3. save cache
-        sessionStorage.setItem("page-data", JSON.stringify(data));
+        // 💾 save avec timestamp
+        sessionStorage.setItem(
+          CACHE_KEY,
+          JSON.stringify({
+            data,
+            timestamp: Date.now(),
+          })
+        );
 
         setSections(data);
       } catch (e) {
