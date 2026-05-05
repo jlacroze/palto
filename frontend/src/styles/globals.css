@@ -93,3 +93,25 @@ section {
     transform: scaleX(0.6) translateX(30px);
   }
 }
+
+@font-face {
+  font-family: 'CormorantRegular';
+  src: url('../assets/fonts/CormorantGaramond-Regular.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'CoromantBold';
+  src: url('../assets/fonts/CormorantGaramond-Bold.ttf') format('truetype');
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'CoromantItalic';
+  src: url('../assets/fonts/CormorantGaramond-Italic.ttf') format('truetype');
+  font-weight: 400;
+  font-style: italic;
+  font-display: swap;
+}
