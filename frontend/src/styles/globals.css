@@ -95,23 +95,9 @@ section {
 }
 
 @font-face {
-  font-family: 'CormorantRegular';
-  src: url('../assets/fonts/CormorantGaramond-Regular.ttf') format('truetype');
-  font-weight: 400;
-  font-style: normal;
-  font-display: swap;
-}
-@font-face {
   font-family: 'CoromantBold';
-  src: url('../assets/fonts/CormorantGaramond-Bold.ttf') format('truetype');
+  src: url('../assets/fonts/CormorantGaramond-Bold.woff2') format('woff2');
   font-weight: 600;
   font-style: normal;
-  font-display: swap;
-}
-@font-face {
-  font-family: 'CoromantItalic';
-  src: url('../assets/fonts/CormorantGaramond-Italic.ttf') format('truetype');
-  font-weight: 400;
-  font-style: italic;
   font-display: swap;
 }
