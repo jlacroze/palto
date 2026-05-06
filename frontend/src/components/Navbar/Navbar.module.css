@@ -76,8 +76,8 @@
 .link {
   color: rgba(0, 0, 0, 0.75);
   text-decoration: none;
-  font-family: "CormorantRegular", serif;
-  font-weight: 600;
+  font-family: "CormorantBold", serif;
+  font-weight: 400;
   font-size: 20px;
   letter-spacing: 1px;
   position: relative;
@@ -139,7 +139,7 @@
 
 .menuContent a {
   color: var(--color-ink);
-  font-family: "CormorantRegular", serif;
+  font-family: "CormorantBold", serif;
   font-size: 28px;
   letter-spacing: 2px;
   text-decoration: none;
