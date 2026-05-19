@@ -2,7 +2,7 @@ import styles from "./Team.module.css";
 import useReveal from "../../hooks/useReveal";
 import { usePage } from "../../hooks/usePage";
 import { getMediaUrl, getSection } from "../../lib/mediaHelpers";
-import fallbackImg from "../../assets/bg_hero.avif";
+import fallbackImg from "../../assets/photo_theau.JPG";
 
 export default function Team() {
   const { sections } = usePage();

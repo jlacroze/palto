@@ -34,6 +34,11 @@ export default function Services() {
         title: "T",
         desc: "Tracking & Pilotage de la Performance - Mettre en place des indicateurs et une gouvernance claire",
       },
+      {
+        id: 5,
+        title: "O",
+        desc: "Operational Excellence - Optimiser durablement les pratiques quotidiennes",
+      },
     ],
   };
 

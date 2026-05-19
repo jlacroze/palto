@@ -52,16 +52,12 @@
   position: absolute;
   top: 0;
   right: 0;
-
   width: 50%;
   height: 100%;
-
   background-size: cover;
   background-position: center;
-
   opacity: 0.35; /* 🔥 plus premium */
   filter: grayscale(100%);
-
   z-index: 0;
 }
 
@@ -230,7 +226,7 @@
   }
 
   .grid {
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: repeat(5, 1fr);
   }
 
   .cardInner {
