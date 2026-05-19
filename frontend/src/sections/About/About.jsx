@@ -3,7 +3,7 @@ import styles from "./About.module.css";
 import useReveal from "../../hooks/useReveal";
 import { usePage } from "../../hooks/usePage";
 import { getMediaUrl, getSection } from "../../lib/mediaHelpers";
-import imageFallback from "../../assets/bg_hero.avif";
+import imageFallback from "../../assets/about_img.avif";
 
 export default function About() {
   const { sections } = usePage();
@@ -30,12 +30,11 @@ export default function About() {
   const about = getSection(sections, "sections.about");
 
   const fallbackAbout = {
-    title: "Une vision durable et stratégique",
+    title: "Une transformation stratégique et durable",
     text1:
-      "PALTO accompagne les entreprises dans leurs décisions stratégiques en combinant expertise métier et vision long terme.",
+      "Chez PALTO, nous cherchons avant tout à vous proposer un service sur mesure en fonction de vos besoins.   Nous analysons, structurons, optimisons et déployons des outils et solutions ciblées afin que vous puissiez retrouver de l’efficacité opérationnelle dans vos tâches quotidiennes.",
     text2:
-      "Nous structurons et pilotons vos projets avec exigence afin de garantir des résultats concrets et durables.",
-    cardLabel: "PALTO",
+      "Au-delà de la simple recommandation, nous nous engageons à vos côtés dans la mise en œuvre opérationnelle. Notre objectif est simple : vous permettre de retrouver de l'efficacité opérationnelle dans vos tâches quotidiennes, de redonner du sens et de la fluidité au travail de vos équipes, et de vous concentrer pleinement sur ce qui fait la véritable valeur ajoutée de votre activité.",
     cardTitle: "Conseil Stratégique",
   };
 
@@ -82,7 +81,6 @@ export default function About() {
         </div>
 
         <div className={`${styles.card} ${visible ? styles.cardVisible : ""}`}>
-          <p className="label">{aboutData.cardLabel}</p>
           <h3 className={styles.big}>{aboutData.cardTitle}</h3>
         </div>
       </div>

@@ -10,8 +10,8 @@ export default function Hero() {
   const hero = getSection(sections, "sections.hero");
 
   const fallbackHero = {
-    title: "Excellence & stratégie",
-    subtitle: "Votre partenaire digital",
+    title: "Mettre le numérique au service du juridique",
+    subtitle: "",
   };
 
   const heroData = hero || fallbackHero;

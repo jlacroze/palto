@@ -11,29 +11,28 @@ export default function Services() {
   const servicesSection = getSection(sections, "sections.services");
 
   const fallback = {
-    label: "Expertises",
     title: "Des solutions pensées pour durer",
     subtitle: "Une approche structurée pour accompagner votre croissance",
     items: [
       {
         id: 1,
-        title: "Conseil stratégique",
-        desc: "Accompagnement dans vos prises de décision et structuration de votre vision.",
+        title: "P",
+        desc: "Priorisation Stratégique - Aligner la direction juridique avec les enjeux business",
       },
       {
         id: 2,
-        title: "Transformation digitale",
-        desc: "Optimisation de vos outils et process pour une performance durable.",
+        title: "A",
+        desc: "Architecture des Processus - Structurer les workflows et clarifier les responsabilités",
       },
       {
         id: 3,
-        title: "Pilotage de projet",
-        desc: "Gestion rigoureuse et suivi de vos projets à fort enjeu.",
+        title: "L",
+        desc: "Leverage Technologique - Déployer efficacement des outils LegalTech & IA",
       },
       {
         id: 4,
-        title: "Audit & analyse",
-        desc: "Diagnostic précis pour identifier vos leviers de croissance.",
+        title: "T",
+        desc: "Tracking & Pilotage de la Performance - Mettre en place des indicateurs et une gouvernance claire",
       },
     ],
   };
@@ -74,7 +73,6 @@ export default function Services() {
       />
 
       <div className={styles.header}>
-        <p className="label">{data.label}</p>
         <h2 className={styles.heading}>{data.title}</h2>
         <p className={styles.subtitle}>{data.subtitle}</p>
       </div>

@@ -11,7 +11,6 @@ export default function Team() {
   const team = getSection(sections, "sections.team");
 
   const fallback = {
-    label: "Équipe",
     title: "L'expertise au cœur du projet",
     items: [
       {
@@ -42,7 +41,6 @@ export default function Team() {
       </div>
 
       <div className={styles.header}>
-        <p className="label">{data.label}</p>
         <h2 className={styles.heading}>{data.title}</h2>
       </div>
 
