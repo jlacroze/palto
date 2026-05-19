@@ -11,7 +11,7 @@ export default function Team() {
   const team = getSection(sections, "sections.team");
 
   const fallback = {
-    title: "L'expertise au cœur du projet",
+    title: "Notre équipe : L'expertise au cœur du projet",
     items: [
       {
         id: 1,
