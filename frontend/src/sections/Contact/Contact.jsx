@@ -4,7 +4,7 @@ import useReveal from "../../hooks/useReveal";
 import { usePage } from "../../hooks/usePage";
 import { sendContactForm } from "../../lib/emailService";
 import { getMediaUrl, getSection } from "../../lib/mediaHelpers";
-import contactFallback from "../../assets/bg_hero.avif";
+import contactFallback from "../../assets/bg_contact.avif";
 
 export default function Contact() {
   const { sections } = usePage();
@@ -17,7 +17,7 @@ export default function Contact() {
 
   const fallback = {
     title: "Nous contacter",
-    subtitle: "GET IN TOUCH",
+    subtitle: "",
   };
 
   const data = contact || fallback;
@@ -74,7 +74,7 @@ export default function Contact() {
                 <input
                   id={`${id}-firstname`}
                   name="firstname"
-                  placeholder="Jean"
+                  placeholder="Camille"
                   required
                   autoComplete="given-name"
                 />

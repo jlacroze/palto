@@ -2,7 +2,7 @@ import styles from "./Team.module.css";
 import useReveal from "../../hooks/useReveal";
 import { usePage } from "../../hooks/usePage";
 import { getMediaUrl, getSection } from "../../lib/mediaHelpers";
-import fallbackImg from "../../assets/photo_theau.JPG";
+import fallbackImg from "../../assets/bg_contact.avif";
 
 export default function Team() {
   const { sections } = usePage();
@@ -15,17 +15,17 @@ export default function Team() {
     items: [
       {
         id: 1,
-        name: "Jean Dupont",
-        role: "Fondateur",
+        name: "Théau Charlier",
+        role: "Fondateur & Consultant Legal Ops",
         description:
-          "Expert en stratégie et pilotage de projets complexes, il accompagne les entreprises dans leurs décisions clés.",
+          "Théau a construit un parcours hybride, à la croisée du droit, du conseil en transformation et de l'innovation. Fort d'expériences dans de grandes entreprises de conseil et Big 4, où il a piloté des programmes de transformation Legal Ops, il accompagne aujourd'hui les cabinets d'avocats et les directions juridiques d'indépendants, de PME et d'ETI dans la structuration et l'optimisation de leurs opérations.",
       },
       {
         id: 2,
-        name: "Marie Martin",
-        role: "Responsable stratégie",
+        name: "Jérémy Lacroze",
+        role: "Lead Tech & Ingénieur développeur",
         description:
-          "Spécialisée en transformation digitale et organisation, elle structure et optimise les performances.",
+          "Spécialisé en transformation digitale et organisation, il structure et optimise les performances. il accompagne aujourd'hui les cabinets d'avocats et les directions juridiques d'indépendants, de PME et d'ETI dans la structuration et l'optimisation de leurs outils et sites internet.",
       },
     ],
   };
