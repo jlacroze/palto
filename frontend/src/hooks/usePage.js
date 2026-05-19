@@ -12,10 +12,9 @@ export const usePage = () => {
       try {
         const cached = sessionStorage.getItem(CACHE_KEY);
 
-        if (cached) {
+        if (cached && !import.meta.env.DEV) {
           const { data, timestamp } = JSON.parse(cached);
 
-          // ✅ si cache encore valide
           if (Date.now() - timestamp < CACHE_DURATION) {
             setSections(data);
             return;
