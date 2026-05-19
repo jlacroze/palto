@@ -2,7 +2,9 @@ import styles from "./Team.module.css";
 import useReveal from "../../hooks/useReveal";
 import { usePage } from "../../hooks/usePage";
 import { getMediaUrl, getSection } from "../../lib/mediaHelpers";
-import fallbackImg from "../../assets/bg_contact.avif";
+
+import photo1 from "../../assets/photo_theau.JPG";
+import photo2 from "../../assets/photo_jeremy.jpg";
 
 export default function Team() {
   const { sections } = usePage();
@@ -15,6 +17,7 @@ export default function Team() {
     items: [
       {
         id: 1,
+        photo: photo1,
         name: "Théau Charlier",
         role: "Fondateur & Consultant Legal Ops",
         description:
@@ -22,6 +25,7 @@ export default function Team() {
       },
       {
         id: 2,
+        photo: photo2,
         name: "Jérémy Lacroze",
         role: "Lead Tech & Ingénieur développeur",
         description:
@@ -34,7 +38,6 @@ export default function Team() {
 
   return (
     <section id="team" className={styles.section}>
-
       <div className={styles.lines}>
         <span />
         <span />
@@ -48,27 +51,32 @@ export default function Team() {
         ref={ref}
         className={`${styles.wrapper} ${visible ? styles.show : ""}`}
       >
-        {data.items.map((member, index) => (
-          <div
-            key={member.id}
-            className={`${styles.person} ${
-              index % 2 === 0 ? styles.left : styles.right
-            }`}
-          >
-            <div className={styles.image}>
-              <img
-                src={getMediaUrl(member.photo, fallbackImg)}
-                alt={member.name}
-              />
-            </div>
+        {data.items.map((member, index) => {
+          // Fallback indépendant pour chaque membre
+          const fallbackImage = index === 0 ? photo1 : photo2;
 
-            <div className={styles.card}>
-              <h3>{member.name}</h3>
-              <span>{member.role}</span>
-              <p>{member.description || member.desc}</p>
+          return (
+            <div
+              key={member.id}
+              className={`${styles.person} ${
+                index % 2 === 0 ? styles.left : styles.right
+              }`}
+            >
+              <div className={styles.image}>
+                <img
+                  src={getMediaUrl(member.photo) || fallbackImage}
+                  alt={member.name}
+                />
+              </div>
+
+              <div className={styles.card}>
+                <h3>{member.name}</h3>
+                <span>{member.role}</span>
+                <p>{member.description || member.desc}</p>
+              </div>
             </div>
-          </div>
-        ))}
+          );
+        })}
       </div>
     </section>
   );
