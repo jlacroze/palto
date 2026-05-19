@@ -1,22 +1,18 @@
 import styles from "./Team.module.css";
 import useReveal from "../../hooks/useReveal";
 import { usePage } from "../../hooks/usePage";
-
+import { getMediaUrl, getSection } from "../../lib/mediaHelpers";
 import fallbackImg from "../../assets/bg_hero.avif";
 
 export default function Team() {
   const { sections } = usePage();
   const [ref, visible] = useReveal();
 
-  // 🔥 Récupération section
-  const team = sections.find(
-    (section) => section.__component === "sections.team"
-  );
+  const team = getSection(sections, "sections.team");
 
-  // 🔥 FALLBACK COMPLET
   const fallback = {
     label: "Équipe",
-    title: "L’expertise au cœur du projet",
+    title: "L'expertise au cœur du projet",
     items: [
       {
         id: 1,
@@ -35,68 +31,43 @@ export default function Team() {
     ],
   };
 
-  const data =
-    team && team.items?.length > 0 ? team : fallback;
-
-  // 🔥 Helper image (Strapi Cloud OK)
-  const getMediaUrl = (media) => {
-    if (!media) return fallbackImg;
-
-    // Strapi Cloud → URL déjà complète
-    if (media.url?.startsWith("http")) return media.url;
-
-    // fallback local
-    return `${import.meta.env.VITE_API_URL}${media.url}`;
-  };
+  const data = team && team.items?.length > 0 ? team : fallback;
 
   return (
     <section id="team" className={styles.section}>
-      
-      {/* LIGNES */}
+
       <div className={styles.lines}>
         <span />
         <span />
       </div>
 
-      {/* HEADER */}
       <div className={styles.header}>
         <p className="label">{data.label}</p>
-
-        <h2 className={styles.heading}>
-          {data.title}
-        </h2>
+        <h2 className={styles.heading}>{data.title}</h2>
       </div>
 
-      {/* CONTENT */}
       <div
         ref={ref}
-        className={`${styles.wrapper} ${
-          visible ? styles.show : ""
-        }`}
+        className={`${styles.wrapper} ${visible ? styles.show : ""}`}
       >
         {data.items.map((member, index) => (
           <div
-            key={member.id || index}
+            key={member.id}
             className={`${styles.person} ${
               index % 2 === 0 ? styles.left : styles.right
             }`}
           >
-            {/* IMAGE */}
             <div className={styles.image}>
               <img
-                src={getMediaUrl(member.photo)}
+                src={getMediaUrl(member.photo, fallbackImg)}
                 alt={member.name}
               />
             </div>
 
-            {/* CARD */}
             <div className={styles.card}>
               <h3>{member.name}</h3>
               <span>{member.role}</span>
-
-              <p>
-                {member.description || member.desc}
-              </p>
+              <p>{member.description || member.desc}</p>
             </div>
           </div>
         ))}

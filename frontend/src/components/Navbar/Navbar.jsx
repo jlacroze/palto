@@ -18,12 +18,13 @@ export default function Navbar() {
     { label: "Contact", id: "contact" },
   ];
 
-  // lock scroll
   useEffect(() => {
     document.body.style.overflow = isOpen ? "hidden" : "";
+    return () => {
+      document.body.style.overflow = "";
+    };
   }, [isOpen]);
 
-  // hide/show navbar on scroll
   useEffect(() => {
     const handleScroll = () => {
       const currentScroll = window.scrollY;
@@ -31,49 +32,29 @@ export default function Navbar() {
       setScrolled(currentScroll > 10);
 
       if (window.innerWidth >= 768) {
-        if (
-          currentScroll > lastScrollY.current &&
-          currentScroll > 100
-        ) {
-          setHideNav(true);
-        } else {
-          setHideNav(false);
-        }
+        setHideNav(currentScroll > lastScrollY.current && currentScroll > 100);
       }
 
       lastScrollY.current = currentScroll;
+
+      const sections = document.querySelectorAll("section");
+      let closestSection = null;
+      let minDistance = Infinity;
+
+      sections.forEach((section) => {
+        const distance = Math.abs(section.getBoundingClientRect().top);
+        if (distance < minDistance) {
+          minDistance = distance;
+          closestSection = section.id;
+        }
+      });
+
+      if (closestSection) setActive(closestSection);
     };
 
     window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
-
-  // 🔥 SCROLL SPY VERSION UX (TOP OFFSET)
-useEffect(() => {
-  const handleScroll = () => {
-    const sections = document.querySelectorAll("section");
-
-    let closestSection = null;
-    let minDistance = Infinity;
-
-    sections.forEach((section) => {
-      const rect = section.getBoundingClientRect();
-      const distance = Math.abs(rect.top);
-
-      if (distance < minDistance) {
-        minDistance = distance;
-        closestSection = section.id;
-      }
-    });
-
-    if (closestSection) {
-      setActive(closestSection);
-    }
-  };
-
-  window.addEventListener("scroll", handleScroll);
-  return () => window.removeEventListener("scroll", handleScroll);
-}, []);
 
   const closeMenu = () => setIsOpen(false);
 

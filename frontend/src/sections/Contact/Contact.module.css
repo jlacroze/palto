@@ -190,6 +190,28 @@ textarea:focus {
   color: white;
 }
 
+.buttonLoading {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.feedback {
+  padding: 12px 16px;
+  font-size: 12px;
+  letter-spacing: 1px;
+  text-align: center;
+}
+
+.feedbackSuccess {
+  color: #4a7c59;
+  border: 1px solid #4a7c59;
+}
+
+.feedbackError {
+  color: #c0392b;
+  border: 1px solid #c0392b;
+}
+
 /* ===== RESPONSIVE ===== */
 
 @media (min-width: 768px) {

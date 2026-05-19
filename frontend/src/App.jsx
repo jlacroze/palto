@@ -3,6 +3,7 @@ import { lazy, Suspense, useState } from "react";
 import Navbar from "./components/Navbar/Navbar";
 import Hero from "./sections/Hero/Hero";
 import About from "./sections/About/About";
+import ErrorBoundary from "./components/ErrorBoundary/ErrorBoundary";
 
 import CookieBanner from "./components/CookieBanner/CookieBanner";
 import LegalModal from "./components/LegalModal/LegalModal";
@@ -16,7 +17,7 @@ function App() {
   const [isLegalOpen, setIsLegalOpen] = useState(false);
 
   return (
-    <>
+    <ErrorBoundary>
       <Navbar />
       <Hero />
       <About />
@@ -34,7 +35,7 @@ function App() {
         isOpen={isLegalOpen}
         onClose={() => setIsLegalOpen(false)}
       />
-    </>
+    </ErrorBoundary>
   );
 }
 

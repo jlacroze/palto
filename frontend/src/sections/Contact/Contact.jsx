@@ -1,18 +1,19 @@
+import { useRef, useState, useId } from "react";
 import styles from "./Contact.module.css";
 import useReveal from "../../hooks/useReveal";
 import { usePage } from "../../hooks/usePage";
-import emailjs from "@emailjs/browser";
-import { useId } from "react";
-
+import { sendContactForm } from "../../lib/emailService";
+import { getMediaUrl, getSection } from "../../lib/mediaHelpers";
 import contactFallback from "../../assets/bg_hero.avif";
 
 export default function Contact() {
   const { sections } = usePage();
   const [ref, visible] = useReveal();
+  const formRef = useRef(null);
+  const [status, setStatus] = useState("idle"); // idle | loading | success | error
+  const id = useId();
 
-  const contact = sections.find(
-    (section) => section.__component === "sections.contact"
-  );
+  const contact = getSection(sections, "sections.contact");
 
   const fallback = {
     title: "Nous contacter",
@@ -20,40 +21,25 @@ export default function Contact() {
   };
 
   const data = contact || fallback;
+  const imageUrl = getMediaUrl(contact?.image, contactFallback);
 
-  const imageUrl =
-    contact?.image?.url?.startsWith("http")
-      ? contact.image.url
-      : contact?.image?.url
-      ? `${import.meta.env.VITE_API_URL}${contact.image.url}`
-      : contactFallback;
-
-  // 🔥 IDs uniques pour accessibilité
-  const id = useId();
-
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
+    setStatus("loading");
 
-    emailjs
-      .sendForm(
-        "service_phq75fh",
-        "template_71tplbn",
-        e.target,
-        "LLgwv59YM11xmDVn7"
-      )
-      .then(() => {
-        alert("✅ Message envoyé !");
-        e.target.reset();
-      })
-      .catch((error) => {
-        console.error(error);
-        alert("❌ Erreur lors de l'envoi");
-      });
+    try {
+      await sendContactForm(formRef.current);
+      setStatus("success");
+      formRef.current.reset();
+    } catch (error) {
+      console.error(error);
+      setStatus("error");
+    }
   };
 
   return (
     <section id="contact" className={styles.section}>
-      
+
       <div className={styles.lines}>
         <span />
         <span />
@@ -66,7 +52,7 @@ export default function Contact() {
       >
         {/* IMAGE */}
         <div className={styles.image}>
-          <img src={imageUrl} alt="" /> {/* décoratif */}
+          <img src={imageUrl} alt="" />
         </div>
 
         {/* FORM */}
@@ -77,11 +63,11 @@ export default function Contact() {
           </div>
 
           <form
+            ref={formRef}
             onSubmit={handleSubmit}
             className={styles.form}
             aria-labelledby="contact-title"
           >
-            
             <div className={styles.row}>
               <div className={styles.field}>
                 <label htmlFor={`${id}-firstname`}>Prénom</label>
@@ -152,8 +138,24 @@ export default function Contact() {
               />
             </div>
 
-            <button type="submit" className={styles.button}>
-              Envoyer le message
+            {status === "success" && (
+              <p className={`${styles.feedback} ${styles.feedbackSuccess}`}>
+                Message envoyé avec succès.
+              </p>
+            )}
+
+            {status === "error" && (
+              <p className={`${styles.feedback} ${styles.feedbackError}`}>
+                Erreur lors de l'envoi. Veuillez réessayer.
+              </p>
+            )}
+
+            <button
+              type="submit"
+              className={`${styles.button} ${status === "loading" ? styles.buttonLoading : ""}`}
+              disabled={status === "loading"}
+            >
+              {status === "loading" ? "Envoi en cours..." : "Envoyer le message"}
             </button>
           </form>
         </div>

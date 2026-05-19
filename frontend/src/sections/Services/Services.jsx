@@ -1,59 +1,47 @@
 import styles from "./Services.module.css";
 import useReveal from "../../hooks/useReveal";
 import { usePage } from "../../hooks/usePage";
+import { getMediaUrl, getSection } from "../../lib/mediaHelpers";
 import bgFallback from "../../assets/bg_hero.avif";
 
 export default function Services() {
   const { sections } = usePage();
   const [ref, visible] = useReveal();
 
-  const servicesSection = sections.find(
-    (section) => section.__component === "sections.services"
-  );
+  const servicesSection = getSection(sections, "sections.services");
 
-  // 🔥 FALLBACK
- const fallback = {
-  label: "Expertises",
-  title: "Des solutions pensées pour durer",
-  subtitle: "Une approche structurée pour accompagner votre croissance",
-  items: [
-    {
-      id: 1,
-      title: "Conseil stratégique",
-      desc: "Accompagnement dans vos prises de décision et structuration de votre vision.",
-    },
-    {
-      id: 2,
-      title: "Transformation digitale",
-      desc: "Optimisation de vos outils et process pour une performance durable.",
-    },
-    {
-      id: 3,
-      title: "Pilotage de projet",
-      desc: "Gestion rigoureuse et suivi de vos projets à fort enjeu.",
-    },
-    {
-      id: 4,
-      title: "Audit & analyse",
-      desc: "Diagnostic précis pour identifier vos leviers de croissance.",
-    },
-  ],
-};
+  const fallback = {
+    label: "Expertises",
+    title: "Des solutions pensées pour durer",
+    subtitle: "Une approche structurée pour accompagner votre croissance",
+    items: [
+      {
+        id: 1,
+        title: "Conseil stratégique",
+        desc: "Accompagnement dans vos prises de décision et structuration de votre vision.",
+      },
+      {
+        id: 2,
+        title: "Transformation digitale",
+        desc: "Optimisation de vos outils et process pour une performance durable.",
+      },
+      {
+        id: 3,
+        title: "Pilotage de projet",
+        desc: "Gestion rigoureuse et suivi de vos projets à fort enjeu.",
+      },
+      {
+        id: 4,
+        title: "Audit & analyse",
+        desc: "Diagnostic précis pour identifier vos leviers de croissance.",
+      },
+    ],
+  };
 
   const data =
-  servicesSection && servicesSection.items?.length > 0
-    ? servicesSection
-    : fallback;
-
-  // 🔥 HELPER IMAGE
-  const getMediaUrl = (media, fallback) => {
-    if (!media) return fallback;
-
-    if (media.formats?.medium?.url) return media.formats.medium.url;
-    if (media.formats?.small?.url) return media.formats.small.url;
-
-    return media.url || fallback;
-  };
+    servicesSection && servicesSection.items?.length > 0
+      ? servicesSection
+      : fallback;
 
   const bgImage = getMediaUrl(data.background, bgFallback);
 
@@ -61,10 +49,8 @@ export default function Services() {
     const rect = el.getBoundingClientRect();
     const x = e.clientX - rect.left;
     const y = e.clientY - rect.top;
-
     const rotateX = (y / rect.height - 0.5) * -10;
     const rotateY = (x / rect.width - 0.5) * 10;
-
     el.style.transform = `rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale(1.02)`;
     el.style.setProperty("--x", `${x}px`);
     el.style.setProperty("--y", `${y}px`);
@@ -76,40 +62,30 @@ export default function Services() {
 
   return (
     <section id="services" className={styles.section}>
-      
-      {/* LIGNES */}
+
       <div className={styles.lines}>
         <span />
         <span />
       </div>
 
-      {/* IMAGE */}
       <div
         className={styles.bgImage}
         style={{ backgroundImage: `url(${bgImage})` }}
       />
 
-      {/* HEADER */}
       <div className={styles.header}>
         <p className="label">{data.label}</p>
-
-        <h2 className={styles.heading}>
-          {data.title}
-        </h2>
-
-        <p className={styles.subtitle}>
-          {data.subtitle}
-        </p>
+        <h2 className={styles.heading}>{data.title}</h2>
+        <p className={styles.subtitle}>{data.subtitle}</p>
       </div>
 
-      {/* GRID */}
       <div
         ref={ref}
         className={`${styles.grid} ${visible ? styles.show : ""}`}
       >
         {data.items?.map((service, index) => (
           <div
-            key={service.id || index}
+            key={service.id}
             className={styles.card}
             style={{ transitionDelay: `${index * 0.12}s` }}
             onMouseMove={(e) => handleMouseMove(e, e.currentTarget)}
